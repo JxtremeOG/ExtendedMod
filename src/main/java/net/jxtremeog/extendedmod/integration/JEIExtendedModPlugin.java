@@ -27,10 +27,14 @@ public class JEIExtendedModPlugin implements IModPlugin {
         return new ResourceLocation(ExtendedMod.MOD_ID,"jei_plugin");
     }
 
+    //MUST REGISTER RECIPE CATEGORY BELOW
     @Override
     public void registerCategories(IRecipeCategoryRegistration registration) {
         registration.addRecipeCategories(new
                 TempRecipeCategory(registration.getJeiHelpers().getGuiHelper()));
+
+        registration.addRecipeCategories(new
+                TierOneRecipeCategory(registration.getJeiHelpers().getGuiHelper()));
     }
 
     @Override
@@ -38,6 +42,7 @@ public class JEIExtendedModPlugin implements IModPlugin {
         RecipeManager rm = Objects.requireNonNull(Minecraft.getInstance().level).getRecipeManager();
         List<TempRecipe> recipesInfusing = rm.getAllRecipesFor(TempRecipe.Type.INSTANCE);
         registration.addRecipes(TEMP_TYPE, recipesInfusing);
+
         List<TierOneRecipe> recipesTierOne = rm.getAllRecipesFor(TierOneRecipe.Type.WORKBENCH_ONE);
         registration.addRecipes(TIER_ONE_TYPE, recipesTierOne);
     }

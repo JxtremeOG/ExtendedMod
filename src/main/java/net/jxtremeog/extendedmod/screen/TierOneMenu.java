@@ -105,8 +105,8 @@ public class TierOneMenu extends RecipeBookMenu<CraftingContainer> {
      * Callback for when the crafting matrix is changed.
      */
     public void slotsChanged(Container pInventory) {
-        this.access.execute((p_39386_, p_39387_) -> {
-            slotChangedCraftingGrid(this, p_39386_, this.player, this.craftSlots, this.resultSlots);
+        this.access.execute((level, pos) -> {
+            slotChangedCraftingGrid(this, level, this.player, this.craftSlots, this.resultSlots);
         });
     }
 

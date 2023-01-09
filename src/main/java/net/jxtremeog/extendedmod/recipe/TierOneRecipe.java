@@ -35,7 +35,13 @@ public class TierOneRecipe extends CustomRecipe{
         if(pLevel.isClientSide()){
             return false;
         }
+        //TAKE NOTE OF INDEX
         return recipeItems.get(0).test(pContainer.getItem(4));
+    }
+
+    @Override
+    public NonNullList<Ingredient> getIngredients() {
+        return recipeItems;
     }
 
     @Override

@@ -79,6 +79,7 @@ public class TierOneMenu extends RecipeBookMenu<CraftingContainer> {
                     itemstack = craftingrecipe.assemble(pContainer);
                 }
             }else {
+                //CRAFTING VANILLA
                 Optional<CraftingRecipe> optional2 = pLevel.getServer().getRecipeManager().getRecipeFor(RecipeType.CRAFTING, pContainer, pLevel);
                 System.out.println(optional2);
                 if (optional2.isPresent()) {

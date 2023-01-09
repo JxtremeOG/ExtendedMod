@@ -68,7 +68,8 @@ public class TierOneMenu extends RecipeBookMenu<CraftingContainer> {
             // RecipeType.CRAFTING
             Optional<TierOneRecipe> optional = pLevel.getServer().getRecipeManager().getRecipeFor(TierOneRecipe.Type.WORKBENCH_ONE, pContainer, pLevel);
             System.out.println(optional);
-            if (optional.isPresent() && (optional.get().getId() + "").contains("tier_one")) {
+            if (optional.isPresent()) {
+                // && (optional.get().getId() + "").contains("tier_one")
 
                 System.out.println(optional.get().getId());
 
@@ -76,6 +77,20 @@ public class TierOneMenu extends RecipeBookMenu<CraftingContainer> {
                 if (pResult.setRecipeUsed(pLevel, serverplayer, craftingrecipe)) {
                     //RESULT
                     itemstack = craftingrecipe.assemble(pContainer);
+                }
+            }else {
+                Optional<CraftingRecipe> optional2 = pLevel.getServer().getRecipeManager().getRecipeFor(RecipeType.CRAFTING, pContainer, pLevel);
+                System.out.println(optional2);
+                if (optional2.isPresent()) {
+                    // && (optional.get().getId() + "").contains("tier_one")
+
+                    System.out.println(optional2.get().getId());
+
+                    CraftingRecipe craftingrecipe = optional2.get();
+                    if (pResult.setRecipeUsed(pLevel, serverplayer, craftingrecipe)) {
+                        //RESULT
+                        itemstack = craftingrecipe.assemble(pContainer);
+                    }
                 }
             }
 

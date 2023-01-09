@@ -1,5 +1,6 @@
 package net.jxtremeog.extendedmod.screen;
 
+import net.jxtremeog.extendedmod.recipe.TierOneRecipe;
 import net.minecraft.network.protocol.game.ClientboundContainerSetSlotPacket;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.Container;
@@ -63,13 +64,15 @@ public class TierOneMenu extends RecipeBookMenu<CraftingContainer> {
             ServerPlayer serverplayer = (ServerPlayer)pPlayer;
             ItemStack itemstack = ItemStack.EMPTY;
             //RECIPE
-            Optional<CraftingRecipe> optional = pLevel.getServer().getRecipeManager().getRecipeFor(RecipeType.CRAFTING, pContainer, pLevel);
+            // TierOneRecipe.Type.WORKBENCH_ONE
+            // RecipeType.CRAFTING
+            Optional<TierOneRecipe> optional = pLevel.getServer().getRecipeManager().getRecipeFor(TierOneRecipe.Type.WORKBENCH_ONE, pContainer, pLevel);
             System.out.println(optional);
             if (optional.isPresent() && (optional.get().getId() + "").contains("tier_one")) {
 
                 System.out.println(optional.get().getId());
 
-                CraftingRecipe craftingrecipe = optional.get();
+                TierOneRecipe craftingrecipe = optional.get();
                 if (pResult.setRecipeUsed(pLevel, serverplayer, craftingrecipe)) {
                     //RESULT
                     itemstack = craftingrecipe.assemble(pContainer);

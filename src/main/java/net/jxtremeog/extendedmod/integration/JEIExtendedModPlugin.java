@@ -38,7 +38,7 @@ public class JEIExtendedModPlugin implements IModPlugin {
         RecipeManager rm = Objects.requireNonNull(Minecraft.getInstance().level).getRecipeManager();
         List<TempRecipe> recipesInfusing = rm.getAllRecipesFor(TempRecipe.Type.INSTANCE);
         registration.addRecipes(TEMP_TYPE, recipesInfusing);
-        List<TierOneRecipe> recipiesTierOne = rm.getAllRecipesFor(TierOneRecipe.Type.WORKBENCH_ONE);
-        registration.addRecipes(TIER_ONE_TYPE, recipiesTierOne);
+        List<TierOneRecipe> recipesTierOne = rm.getAllRecipesFor(TierOneRecipe.Type.WORKBENCH_ONE);
+        registration.addRecipes(TIER_ONE_TYPE, recipesTierOne);
     }
 }

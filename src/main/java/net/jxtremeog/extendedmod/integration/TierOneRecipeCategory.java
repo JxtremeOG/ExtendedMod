@@ -16,9 +16,9 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 
 public class TierOneRecipeCategory implements IRecipeCategory<TierOneRecipe> {
-    public final static ResourceLocation UID = new ResourceLocation(ExtendedMod.MOD_ID, "gem_infusing");
+    public final static ResourceLocation UID = new ResourceLocation(ExtendedMod.MOD_ID, "workbench_one");
     public final static ResourceLocation TEXTURE =
-            new ResourceLocation(ExtendedMod.MOD_ID, "textures/gui/gem_infusing_station_gui.png");
+            new ResourceLocation(ExtendedMod.MOD_ID, "textures/gui/tier_one_table_gui.png");
 
     private final IDrawable background;
     private final IDrawable icon;
@@ -35,7 +35,7 @@ public class TierOneRecipeCategory implements IRecipeCategory<TierOneRecipe> {
 
     @Override
     public Component getTitle() {
-        return Component.literal("Gem Infusing Station");
+        return Component.literal("Workbench One");
     }
 
     @Override

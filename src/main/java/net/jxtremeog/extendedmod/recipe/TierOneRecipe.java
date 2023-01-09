@@ -2,6 +2,7 @@ package net.jxtremeog.extendedmod.recipe;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
+import com.google.gson.JsonParseException;
 import net.jxtremeog.extendedmod.ExtendedMod;
 import net.minecraft.core.NonNullList;
 import net.minecraft.network.FriendlyByteBuf;
@@ -14,13 +15,15 @@ import net.minecraft.world.level.Level;
 
 import javax.annotation.Nullable;
 
-public class TierOneRecipe implements Recipe<CraftingContainer> {
+public class TierOneRecipe extends CustomRecipe{
+    //implements Recipe<CraftingContainer>
     private final ResourceLocation id;
     private final ItemStack output;
     private final NonNullList<Ingredient> recipeItems;
 
     public TierOneRecipe(ResourceLocation id, ItemStack output,
                                     NonNullList<Ingredient> recipeItems) {
+        super(id);
         this.id = id;
         this.output = output;
         this.recipeItems = recipeItems;
@@ -32,7 +35,6 @@ public class TierOneRecipe implements Recipe<CraftingContainer> {
         if(pLevel.isClientSide()){
             return false;
         }
-        System.out.println(recipeItems.get(0).test(pContainer.getItem(4)));
         return recipeItems.get(0).test(pContainer.getItem(4));
     }
 
@@ -79,17 +81,31 @@ public class TierOneRecipe implements Recipe<CraftingContainer> {
 
         @Override
         public TierOneRecipe fromJson(ResourceLocation pRecipeId, JsonObject pSerializedRecipe) {
-            ItemStack output = ShapedRecipe.itemStackFromJson(GsonHelper.getAsJsonObject(pSerializedRecipe, "output"));
-
             JsonArray ingredients = GsonHelper.getAsJsonArray(pSerializedRecipe, "ingredients");
             NonNullList<Ingredient> inputs = NonNullList.withSize(/*AMOUNT OF INGREDIENTS*/1, Ingredient.EMPTY);
 
             for (int i = 0; i < inputs.size(); i++) {
                 inputs.set(i, Ingredient.fromJson(ingredients.get(i)));
             }
+            ItemStack itemstack = ShapedRecipe.itemStackFromJson(GsonHelper.getAsJsonObject(pSerializedRecipe, "result"));
+            System.out.println("pRecipeId "+pRecipeId);
+            System.out.println("itemstack "+itemstack);
+            System.out.println("nonnulllist "+inputs);
+            return new TierOneRecipe(pRecipeId,itemstack, inputs);
+            }
 
-            return new TierOneRecipe(pRecipeId, output, inputs);
-        }
+            //OLD
+//            ItemStack output = ShapedRecipe.itemStackFromJson(GsonHelper.getAsJsonObject(pSerializedRecipe, "output"));
+//
+//            JsonArray ingredients = GsonHelper.getAsJsonArray(pSerializedRecipe, "ingredients");
+//            NonNullList<Ingredient> inputs = NonNullList.withSize(/*AMOUNT OF INGREDIENTS*/1, Ingredient.EMPTY);
+//
+//            for (int i = 0; i < inputs.size(); i++) {
+//                inputs.set(i, Ingredient.fromJson(ingredients.get(i)));
+//            }
+//
+//            return new TierOneRecipe(pRecipeId, output, inputs);
+//        }
 
         @Override
         public @Nullable TierOneRecipe fromNetwork(ResourceLocation id, FriendlyByteBuf buf) {

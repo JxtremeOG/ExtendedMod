@@ -1,0 +1,11 @@
+{
+  "type": "extendedmod:tier1_craft",
+  "ingredients": [
+    {
+      "item": "extendedmod:raw_zircon"
+    }
+  ],
+  "output": {
+    "item": "extendedmod:zircon"
+  }
+}

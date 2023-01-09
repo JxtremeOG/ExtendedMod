@@ -1,0 +1,12 @@
+{
+  "type": "extendedmod:workbench_one",
+  "ingredients": [
+    {
+      "item": "extendedmod:zircon_block"
+    }
+  ],
+  "result": {
+    "item": "improvmentsmod:zircon",
+    "count": 9
+  }
+}

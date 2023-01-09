@@ -1,0 +1,11 @@
+{
+  "type": "improvmentsmod:testing",
+  "ingredients": [
+    {
+      "item": "extendedmod:raw_zircon"
+    }
+  ],
+  "output": {
+    "item": "extendedmod:zircon"
+  }
+}

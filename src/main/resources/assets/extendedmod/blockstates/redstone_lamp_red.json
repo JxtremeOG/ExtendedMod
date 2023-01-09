@@ -1,0 +1,6 @@
+{
+  "variants": {
+    "lit=true": { "model": "extendedmod:block/redstone_lamp_red_on" },
+    "lit=false": { "model": "extendedmod:block/redstone_lamp_red_off" }
+  }
+}

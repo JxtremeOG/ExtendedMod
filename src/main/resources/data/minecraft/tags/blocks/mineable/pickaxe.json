@@ -1,0 +1,19 @@
+{
+  "replace": false,
+  "values": [
+    "extendedmod:zircon_ore",
+    "extendedmod:zircon_block",
+    "extendedmod:deepslate_zircon_ore",
+
+    "extendedmod:nether_coal_ore",
+    "extendedmod:nether_iron_ore",
+    "extendedmod:nether_diamond_ore",
+    "extendedmod:nether_emerald_ore",
+    "extendedmod:nether_redstone_ore",
+    "extendedmod:nether_lapis_ore",
+    "extendedmod:nether_copper_ore",
+    "extendedmod:deepslate_quartz_ore",
+    "extendedmod:quartz_ore",
+    "extendedmod:temp"
+  ]
+}

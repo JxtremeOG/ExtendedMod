@@ -1,0 +1,20 @@
+{
+  "replace": true,
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "X": {
+      "item": "minecraft:leather"
+    },
+    "Z": {
+      "item": "minecraft:string"
+    }
+  },
+  "pattern": [
+    "ZXZ",
+    "X X",
+    "   "
+  ],
+  "result": {
+    "item": "minecraft:saddle"
+  }
+}

@@ -1,0 +1,5 @@
+{
+  "variants": {
+    "": { "model": "extendedmod:block/zircon_block" }
+  }
+}

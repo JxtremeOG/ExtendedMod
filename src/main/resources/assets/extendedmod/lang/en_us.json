@@ -1,0 +1,36 @@
+{
+  "replace": true,
+  "item.extendedmod.zircon": "Zircon",
+  "item.extendedmod.raw_zircon": "Raw Zircon",
+
+  "item.dyed": "Dyed Test",
+
+  "block.extendedmod.zircon_block": "Block of Zircon",
+  "block.extendedmod.zircon_ore": "Zircon Ore",
+  "block.extendedmod.deepslate_zircon_ore": "Deepslate Zircon Ore",
+  "block.extendedmod.endstone_zircon_ore": "End Zircon Ore",
+  "block.extendedmod.netherrack_zircon_ore": "Nether Zircon Ore",
+
+  "itemGroup.extendedtab": "Extended Tab",
+  "entity.minecraft.villager.extendedmod.cauldron_master": "Cauldron Master",
+
+  "item.extendedmod.regeneration_bucket": "Bucket of Regeneration",
+  "item.extendedmod.netherite_horse_armor": "Netherite Horse Armor",
+
+  "block.extendedmod.temp": "Temp",
+  "block.extendedmod.tierone_table": "Tier 1 Workbench",
+  "block.extendedmod.tiertwo_table": "Tier 2 Workbench",
+  "block.extendedmod.quartz_ore": "Quartz Ore",
+  "block.extendedmod.deepslate_quartz_ore": "Deepslate Quartz Ore",
+  "block.extendedmod.nether_coal_ore": "Nether Coal Ore",
+  "block.extendedmod.nether_iron_ore": "Nether Iron Ore",
+  "block.extendedmod.nether_diamond_ore": "Nether Diamond Ore",
+  "block.extendedmod.nether_emerald_ore": "Nether Emerald Ore",
+  "block.extendedmod.nether_redstone_ore": "Nether Redstone Ore",
+  "block.extendedmod.nether_lapis_ore": "Nether Lapis Ore",
+  "block.extendedmod.nether_copper_ore": "Nether Copper Ore",
+  "block.extendedmod.redstone_lamp_red": "Red Redstone Lamp",
+
+  "key.category.extendedmod.tutorial": "Test Mod",
+  "key,extendedmod.test": "Test"
+}

@@ -3,11 +3,13 @@ package net.jxtremeog.extendedmod.recipe;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParseException;
+import it.unimi.dsi.fastutil.ints.IntList;
 import net.jxtremeog.extendedmod.ExtendedMod;
 import net.minecraft.core.NonNullList;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.GsonHelper;
+import net.minecraft.world.entity.player.StackedContents;
 import net.minecraft.world.inventory.CraftingContainer;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.*;
@@ -20,6 +22,7 @@ public class TierOneRecipe extends CustomRecipe{
     private final ResourceLocation id;
     private final ItemStack output;
     private final NonNullList<Ingredient> recipeItems;
+    private final boolean isSimple;
 
     public TierOneRecipe(ResourceLocation id, ItemStack output,
                                     NonNullList<Ingredient> recipeItems) {
@@ -27,16 +30,31 @@ public class TierOneRecipe extends CustomRecipe{
         this.id = id;
         this.output = output;
         this.recipeItems = recipeItems;
+        this.isSimple = recipeItems.stream().allMatch(Ingredient::isSimple);
     }
 
     @Override
     public boolean matches(CraftingContainer pContainer, Level pLevel) {
-
         if(pLevel.isClientSide()){
             return false;
         }
-        //TAKE NOTE OF INDEX
-        return recipeItems.get(0).test(pContainer.getItem(4));
+        StackedContents stackedcontents = new StackedContents();
+        java.util.List<ItemStack> inputs = new java.util.ArrayList<>();
+        int i = 0;
+
+        for(int j = 0; j < pContainer.getContainerSize(); ++j) {
+            ItemStack itemstack = pContainer.getItem(j);
+            if (!itemstack.isEmpty()) {
+                ++i;
+                if (isSimple)
+                    stackedcontents.accountStack(itemstack, 1);
+                else inputs.add(itemstack);
+            }
+        }
+
+        return i == this.recipeItems.size() && (isSimple ? stackedcontents.canCraft(this, (IntList)null) : net.minecraftforge.common.util.RecipeMatcher.findMatches(inputs,  this.recipeItems) != null);
+//        //TAKE NOTE OF INDEX
+//        return recipeItems.get(0).test(pContainer.getItem(4));
     }
 
     @Override
@@ -46,7 +64,7 @@ public class TierOneRecipe extends CustomRecipe{
 
     @Override
     public ItemStack assemble(CraftingContainer pContainer) {
-        return output;
+        return output.copy();
     }
 
     @Override
@@ -56,7 +74,7 @@ public class TierOneRecipe extends CustomRecipe{
 
     @Override
     public ItemStack getResultItem() {
-        return output.copy();
+        return output;
     }
 
     @Override

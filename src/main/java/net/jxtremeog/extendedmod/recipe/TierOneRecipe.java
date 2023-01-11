@@ -104,15 +104,40 @@ public class TierOneRecipe implements Recipe<CraftingContainer>{
                 new ResourceLocation(ExtendedMod.MOD_ID, "workbench_one");
 
         @Override
-        public TierOneRecipe fromJson(ResourceLocation pRecipeId, JsonObject pSerializedRecipe) {
-            JsonArray ingredients = GsonHelper.getAsJsonArray(pSerializedRecipe, "ingredients");
-            NonNullList<Ingredient> inputs = NonNullList.withSize(/*AMOUNT OF INGREDIENTS*/1, Ingredient.EMPTY);
+//        public TierOneRecipe fromJson(ResourceLocation pRecipeId, JsonObject pSerializedRecipe) {
+//            JsonArray ingredients = GsonHelper.getAsJsonArray(pSerializedRecipe, "ingredients");
+//            NonNullList<Ingredient> inputs = NonNullList.withSize(/*AMOUNT OF INGREDIENTS*/2, Ingredient.EMPTY);
+//
+//            for (int i = 0; i < inputs.size(); i++) {
+//                inputs.set(i, Ingredient.fromJson(ingredients.get(i)));
+//            }
+//            ItemStack itemstack = ShapedRecipe.itemStackFromJson(GsonHelper.getAsJsonObject(pSerializedRecipe, "result"));
+//            return new TierOneRecipe(pRecipeId,itemstack, inputs);
+//        }
 
-            for (int i = 0; i < inputs.size(); i++) {
-                inputs.set(i, Ingredient.fromJson(ingredients.get(i)));
+        public TierOneRecipe fromJson(ResourceLocation pRecipeId, JsonObject pJson) {
+            NonNullList<Ingredient> nonnulllist = itemsFromJson(GsonHelper.getAsJsonArray(pJson, "ingredients"));
+            if (nonnulllist.isEmpty()) {
+                throw new JsonParseException("No ingredients for shapeless recipe");
+            } else if (nonnulllist.size() > 9) {
+                throw new JsonParseException("Too many ingredients for shapeless recipe. The maximum is " + (9));
+            } else {
+                ItemStack itemstack = ShapedRecipe.itemStackFromJson(GsonHelper.getAsJsonObject(pJson, "result"));
+                return new TierOneRecipe(pRecipeId, itemstack, nonnulllist);
             }
-            ItemStack itemstack = ShapedRecipe.itemStackFromJson(GsonHelper.getAsJsonObject(pSerializedRecipe, "result"));
-            return new TierOneRecipe(pRecipeId,itemstack, inputs);
+        }
+
+        private static NonNullList<Ingredient> itemsFromJson(JsonArray pIngredientArray) {
+            NonNullList<Ingredient> nonnulllist = NonNullList.create();
+
+            for(int i = 0; i < pIngredientArray.size(); ++i) {
+                Ingredient ingredient = Ingredient.fromJson(pIngredientArray.get(i));
+                if (true || !ingredient.isEmpty()) { // FORGE: Skip checking if an ingredient is empty during shapeless recipe deserialization to prevent complex ingredients from caching tags too early. Can not be done using a config value due to sync issues.
+                    nonnulllist.add(ingredient);
+                }
+            }
+
+            return nonnulllist;
         }
 
         @Override

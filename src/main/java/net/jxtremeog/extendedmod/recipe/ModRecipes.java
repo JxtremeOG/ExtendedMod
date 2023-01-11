@@ -26,6 +26,12 @@ public class ModRecipes {
     public static final RegistryObject<RecipeSerializer<TierTwoShapedRecipe>> WORKBENCH_TWO_SHAPED_SERIALIZER =
             SERIALIZERS.register("workbench_two_shaped", () -> TierTwoShapedRecipe.Serializer.WORKBENCH_TWO_SHAPED);
 
+    public static final RegistryObject<RecipeSerializer<TierThreeShapelessRecipe>> WORKBENCH_THREE_SHAPELESS_SERIALIZER =
+            SERIALIZERS.register("workbench_three_shapeless", () -> TierThreeShapelessRecipe.Serializer.WORKBENCH_THREE_SHAPELESS);
+
+    public static final RegistryObject<RecipeSerializer<TierThreeShapedRecipe>> WORKBENCH_THREE_SHAPED_SERIALIZER =
+            SERIALIZERS.register("workbench_three_shaped", () -> TierThreeShapedRecipe.Serializer.WORKBENCH_THREE_SHAPED);
+
 
     public static void register(IEventBus eventBus){
         SERIALIZERS.register(eventBus);

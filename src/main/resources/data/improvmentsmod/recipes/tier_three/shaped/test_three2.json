@@ -1,0 +1,14 @@
+{
+  "type": "extendedmod:workbench_three_shaped",
+  "key": {
+    "S": {
+      "item": "minecraft:coal_block"
+    }
+  },
+  "pattern": [
+    "SSS"
+  ],
+  "result": {
+    "item": "minecraft:amethyst_block"
+  }
+}

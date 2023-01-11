@@ -1,0 +1,12 @@
+{
+  "type": "extendedmod:workbench_three_shapeless",
+  "ingredients": [
+    {
+      "item": "minecraft:coal"
+    }
+  ],
+  "result": {
+    "item": "extendedmod:zircon",
+    "count": 9
+  }
+}

@@ -1,6 +1,7 @@
 package net.jxtremeog.extendedmod.block.custom;
 
 import net.jxtremeog.extendedmod.screen.TierOneScreen;
+import net.jxtremeog.extendedmod.screen.TierThreeScreen;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.MenuProvider;
@@ -19,6 +20,6 @@ public class TierThreeBlock extends CraftingTableBlock {
     }
 
     public MenuProvider getMenuProvider(BlockState state, Level worldIn, BlockPos pos) {
-        return new SimpleMenuProvider((id, inventory, entity) -> new TierOneScreen(id, inventory, ContainerLevelAccess.create((Level)worldIn, (BlockPos)pos), (Block)this), GUI_TITLE);
+        return new SimpleMenuProvider((id, inventory, entity) -> new TierThreeScreen(id, inventory, ContainerLevelAccess.create((Level)worldIn, (BlockPos)pos), (Block)this), GUI_TITLE);
     }
 }

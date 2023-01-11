@@ -9,6 +9,7 @@ import net.minecraft.core.NonNullList;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.GsonHelper;
+import net.minecraft.world.ContainerHelper;
 import net.minecraft.world.entity.player.StackedContents;
 import net.minecraft.world.inventory.CraftingContainer;
 import net.minecraft.world.item.ItemStack;
@@ -17,7 +18,7 @@ import net.minecraft.world.level.Level;
 
 import javax.annotation.Nullable;
 
-public class TierOneRecipe extends CustomRecipe{
+public class TierOneRecipe implements Recipe<CraftingContainer>{
     //implements Recipe<CraftingContainer>
     private final ResourceLocation id;
     private final ItemStack output;
@@ -26,7 +27,7 @@ public class TierOneRecipe extends CustomRecipe{
 
     public TierOneRecipe(ResourceLocation id, ItemStack output,
                                     NonNullList<Ingredient> recipeItems) {
-        super(id);
+//        super(id); Needs to extend CustomRecipe to implement
         this.id = id;
         this.output = output;
         this.recipeItems = recipeItems;
@@ -51,7 +52,6 @@ public class TierOneRecipe extends CustomRecipe{
                 else inputs.add(itemstack);
             }
         }
-
         return i == this.recipeItems.size() && (isSimple ? stackedcontents.canCraft(this, (IntList)null) : net.minecraftforge.common.util.RecipeMatcher.findMatches(inputs,  this.recipeItems) != null);
 //        //TAKE NOTE OF INDEX
 //        return recipeItems.get(0).test(pContainer.getItem(4));
@@ -59,12 +59,12 @@ public class TierOneRecipe extends CustomRecipe{
 
     @Override
     public NonNullList<Ingredient> getIngredients() {
-        return recipeItems;
+        return this.recipeItems;
     }
 
     @Override
     public ItemStack assemble(CraftingContainer pContainer) {
-        return output.copy();
+        return this.getResultItem().copy();
     }
 
     @Override

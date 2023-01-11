@@ -1,9 +1,12 @@
 package net.jxtremeog.extendedmod.screen;
 
 import net.jxtremeog.extendedmod.recipe.TierOneRecipe;
+import net.jxtremeog.extendedmod.world.inventory.ModResultSlot;
 import net.minecraft.network.protocol.game.ClientboundContainerSetSlotPacket;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.Container;
+import net.minecraft.world.ContainerHelper;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.player.StackedContents;
@@ -26,9 +29,10 @@ public class TierOneMenu extends RecipeBookMenu<CraftingContainer> {
     private static final int USE_ROW_SLOT_START = 37;
     private static final int USE_ROW_SLOT_END = 46;
     private final CraftingContainer craftSlots = new CraftingContainer(this, 3, 3);
-    private final ResultContainer resultSlots = new ResultContainer();
+    public final ResultContainer resultSlots = new ResultContainer();
     private final ContainerLevelAccess access;
     private final Player player;
+    public static ResourceLocation currentRecipe;
 
     public TierOneMenu(int pContainerId, Inventory pPlayerInventory) {
         this(pContainerId, pPlayerInventory, ContainerLevelAccess.NULL);
@@ -38,7 +42,7 @@ public class TierOneMenu extends RecipeBookMenu<CraftingContainer> {
         super(MenuType.CRAFTING, pContainerId);
         this.access = pAccess;
         this.player = pPlayerInventory.player;
-        this.addSlot(new ResultSlot(pPlayerInventory.player, this.craftSlots, this.resultSlots, 0, 124, 35));
+        this.addSlot(new ModResultSlot(pPlayerInventory.player, this.craftSlots, this.resultSlots, 0, 124, 35));
 
         for(int i = 0; i < 3; ++i) {
             for(int j = 0; j < 3; ++j) {
@@ -67,11 +71,13 @@ public class TierOneMenu extends RecipeBookMenu<CraftingContainer> {
             // TierOneRecipe.Type.WORKBENCH_ONE
             // RecipeType.CRAFTING
             Optional<TierOneRecipe> optional = pLevel.getServer().getRecipeManager().getRecipeFor(TierOneRecipe.Type.WORKBENCH_ONE, pContainer, pLevel);
-            System.out.println(optional);
             if (optional.isPresent()) {
                 // && (optional.get().getId() + "").contains("tier_one")
 
-                System.out.println(optional.get().getId());
+                System.out.println("Recipe detected "+optional.get().getId());
+
+                //currentRecipe used in ModResultSlot class
+                currentRecipe = optional.get().getId();
 
                 TierOneRecipe craftingrecipe = optional.get();
                 if (pResult.setRecipeUsed(pLevel, serverplayer, craftingrecipe)) {
@@ -86,6 +92,9 @@ public class TierOneMenu extends RecipeBookMenu<CraftingContainer> {
                     // && (optional.get().getId() + "").contains("tier_one")
 
                     System.out.println(optional2.get().getId());
+
+                    //currentRecipe used in ModResultSlot class
+                    currentRecipe = optional2.get().getId();
 
                     CraftingRecipe craftingrecipe = optional2.get();
                     if (pResult.setRecipeUsed(pLevel, serverplayer, craftingrecipe)) {

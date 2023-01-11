@@ -1,0 +1,15 @@
+{
+  "type": "extendedmod:workbench_one",
+  "ingredients": [
+    {
+      "item": "minecraft:iron_ingot"
+    },
+    {
+      "item": "extendedmod:zircon"
+    }
+  ],
+  "result": {
+    "item": "minecraft:diamond",
+    "count": 1
+  }
+}

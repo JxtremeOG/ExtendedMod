@@ -1,0 +1,14 @@
+{
+  "type": "extendedmod:workbench_two_shaped",
+  "key": {
+    "S": {
+      "item": "extendedmod:zircon_block"
+    }
+  },
+  "pattern": [
+    "SSS"
+  ],
+  "result": {
+    "item": "minecraft:amethyst_block"
+  }
+}

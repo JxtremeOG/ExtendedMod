@@ -1,0 +1,12 @@
+{
+  "type": "extendedmod:workbench_two_shapeless",
+  "ingredients": [
+    {
+      "item": "minecraft:emerald"
+    }
+  ],
+  "result": {
+    "item": "extendedmod:zircon",
+    "count": 9
+  }
+}

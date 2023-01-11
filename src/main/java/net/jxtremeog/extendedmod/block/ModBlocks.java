@@ -1,9 +1,7 @@
 package net.jxtremeog.extendedmod.block;
 
 import net.jxtremeog.extendedmod.ExtendedMod;
-import net.jxtremeog.extendedmod.block.custom.RedstoneLampColoredBlock;
-import net.jxtremeog.extendedmod.block.custom.TempBlock;
-import net.jxtremeog.extendedmod.block.custom.TierOneBlock;
+import net.jxtremeog.extendedmod.block.custom.*;
 import net.jxtremeog.extendedmod.fluid.ModFluids;
 import net.jxtremeog.extendedmod.fluid.custom.RegenerationFluid;
 import net.jxtremeog.extendedmod.item.ModCreativeModeTab;
@@ -40,11 +38,11 @@ public class ModBlocks {
                     .strength(6f).requiresCorrectToolForDrops()), ModCreativeModeTab.EXTENDED_TAB);
 
     public static final RegistryObject<Block> TIERTWO = registerBlock("tiertwo_table",
-            () -> new Block(BlockBehaviour.Properties.of(Material.METAL)
+            () -> new TierTwoBlock(BlockBehaviour.Properties.of(Material.METAL)
                     .strength(6f).requiresCorrectToolForDrops()), ModCreativeModeTab.EXTENDED_TAB);
 
     public static final RegistryObject<Block> TIERTHREE = registerBlock("tierthree_table",
-            () -> new Block(BlockBehaviour.Properties.of(Material.METAL)
+            () -> new TierThreeBlock(BlockBehaviour.Properties.of(Material.METAL)
                     .strength(6f).requiresCorrectToolForDrops()), ModCreativeModeTab.EXTENDED_TAB);
 
     //Quartz Ore

@@ -13,10 +13,18 @@ public class ModRecipes {
 
     public static final RegistryObject<RecipeSerializer<TempRecipe>> TEMP_SERIALIZER =
             SERIALIZERS.register("testing", () -> TempRecipe.Serializer.INSTANCE);
+
     public static final RegistryObject<RecipeSerializer<TierOneShapelessRecipe>> WORKBENCH_ONE_SHAPELESS_SERIALIZER =
             SERIALIZERS.register("workbench_one_shapeless", () -> TierOneShapelessRecipe.Serializer.WORKBENCH_ONE_SHAPELESS);
+
     public static final RegistryObject<RecipeSerializer<TierOneShapedRecipe>> WORKBENCH_ONE_SHAPED_SERIALIZER =
             SERIALIZERS.register("workbench_one_shaped", () -> TierOneShapedRecipe.Serializer.WORKBENCH_ONE_SHAPED);
+
+    public static final RegistryObject<RecipeSerializer<TierTwoShapelessRecipe>> WORKBENCH_TWO_SHAPELESS_SERIALIZER =
+            SERIALIZERS.register("workbench_two_shapeless", () -> TierTwoShapelessRecipe.Serializer.WORKBENCH_TWO_SHAPELESS);
+
+    public static final RegistryObject<RecipeSerializer<TierTwoShapedRecipe>> WORKBENCH_TWO_SHAPED_SERIALIZER =
+            SERIALIZERS.register("workbench_two_shaped", () -> TierTwoShapedRecipe.Serializer.WORKBENCH_TWO_SHAPED);
 
 
     public static void register(IEventBus eventBus){

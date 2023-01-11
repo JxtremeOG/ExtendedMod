@@ -1,8 +1,9 @@
 package net.jxtremeog.extendedmod.recipe;
 
-import com.google.gson.JsonArray;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParseException;
+import com.google.common.annotations.VisibleForTesting;
+import com.google.common.collect.Maps;
+import com.google.common.collect.Sets;
+import com.google.gson.*;
 import it.unimi.dsi.fastutil.ints.IntList;
 import net.jxtremeog.extendedmod.ExtendedMod;
 import net.minecraft.core.NonNullList;
@@ -16,44 +17,77 @@ import net.minecraft.world.item.crafting.*;
 import net.minecraft.world.level.Level;
 
 import javax.annotation.Nullable;
+import java.util.Map;
+import java.util.Set;
 
 public class TierOneShapedRecipe implements Recipe<CraftingContainer>{
-    //implements Recipe<CraftingContainer>
+    static int MAX_WIDTH = 3;
+    static int MAX_HEIGHT = 3;
+
+    public static void setCraftingSize(int width, int height) {
+        if (MAX_WIDTH < width) MAX_WIDTH = width;
+        if (MAX_HEIGHT < height) MAX_HEIGHT = height;
+    }
     private final ResourceLocation id;
     private final ItemStack output;
     private final NonNullList<Ingredient> recipeItems;
-    private final boolean isSimple;
+    final int width;
+    final int height;
 
-    public TierOneShapedRecipe(ResourceLocation id, ItemStack output,
-                               NonNullList<Ingredient> recipeItems) {
+    public TierOneShapedRecipe(ResourceLocation id, int pWidth, int pHeight,
+                               NonNullList<Ingredient> recipeItems, ItemStack output) {
 //        super(id); Needs to extend CustomRecipe to implement
         this.id = id;
+        this.width = pWidth;
+        this.height = pHeight;
         this.output = output;
         this.recipeItems = recipeItems;
-        this.isSimple = recipeItems.stream().allMatch(Ingredient::isSimple);
     }
 
     @Override
-    public boolean matches(CraftingContainer pContainer, Level pLevel) {
-        if(pLevel.isClientSide()){
-            return false;
-        }
-        StackedContents stackedcontents = new StackedContents();
-        java.util.List<ItemStack> inputs = new java.util.ArrayList<>();
-        int i = 0;
+    /**
+     * Used to check if a recipe matches current crafting inventory
+     */
+    public boolean matches(CraftingContainer pInv, Level pLevel) {
+        for(int i = 0; i <= pInv.getWidth() - this.width; ++i) {
+            for(int j = 0; j <= pInv.getHeight() - this.height; ++j) {
+                if (this.matches(pInv, i, j, true)) {
+                    return true;
+                }
 
-        for(int j = 0; j < pContainer.getContainerSize(); ++j) {
-            ItemStack itemstack = pContainer.getItem(j);
-            if (!itemstack.isEmpty()) {
-                ++i;
-                if (isSimple)
-                    stackedcontents.accountStack(itemstack, 1);
-                else inputs.add(itemstack);
+                if (this.matches(pInv, i, j, false)) {
+                    return true;
+                }
             }
         }
-        return i == this.recipeItems.size() && (isSimple ? stackedcontents.canCraft(this, (IntList)null) : net.minecraftforge.common.util.RecipeMatcher.findMatches(inputs,  this.recipeItems) != null);
-//        //TAKE NOTE OF INDEX
-//        return recipeItems.get(0).test(pContainer.getItem(4));
+
+        return false;
+    }
+
+    /**
+     * Checks if the region of a crafting inventory is match for the recipe.
+     */
+    private boolean matches(CraftingContainer pCraftingInventory, int pWidth, int pHeight, boolean pMirrored) {
+        for(int i = 0; i < pCraftingInventory.getWidth(); ++i) {
+            for(int j = 0; j < pCraftingInventory.getHeight(); ++j) {
+                int k = i - pWidth;
+                int l = j - pHeight;
+                Ingredient ingredient = Ingredient.EMPTY;
+                if (k >= 0 && l >= 0 && k < this.width && l < this.height) {
+                    if (pMirrored) {
+                        ingredient = this.recipeItems.get(this.width - k - 1 + l * this.width);
+                    } else {
+                        ingredient = this.recipeItems.get(k + l * this.width);
+                    }
+                }
+
+                if (!ingredient.test(pCraftingInventory.getItem(i + j * pCraftingInventory.getWidth()))) {
+                    return false;
+                }
+            }
+        }
+
+        return true;
     }
 
     @Override
@@ -80,6 +114,130 @@ public class TierOneShapedRecipe implements Recipe<CraftingContainer>{
     public ResourceLocation getId() {
         return id;
     }
+
+    static Map<String, Ingredient> keyFromJson(JsonObject pKeyEntry) {
+        Map<String, Ingredient> map = Maps.newHashMap();
+
+        for(Map.Entry<String, JsonElement> entry : pKeyEntry.entrySet()) {
+            if (entry.getKey().length() != 1) {
+                throw new JsonSyntaxException("Invalid key entry: '" + (String)entry.getKey() + "' is an invalid symbol (must be 1 character only).");
+            }
+
+            if (" ".equals(entry.getKey())) {
+                throw new JsonSyntaxException("Invalid key entry: ' ' is a reserved symbol.");
+            }
+
+            map.put(entry.getKey(), Ingredient.fromJson(entry.getValue()));
+        }
+
+        map.put(" ", Ingredient.EMPTY);
+        return map;
+    }
+
+    static NonNullList<Ingredient> dissolvePattern(String[] pPattern, Map<String, Ingredient> pKeys, int pPatternWidth, int pPatternHeight) {
+        NonNullList<Ingredient> nonnulllist = NonNullList.withSize(pPatternWidth * pPatternHeight, Ingredient.EMPTY);
+        Set<String> set = Sets.newHashSet(pKeys.keySet());
+        set.remove(" ");
+
+        for(int i = 0; i < pPattern.length; ++i) {
+            for(int j = 0; j < pPattern[i].length(); ++j) {
+                String s = pPattern[i].substring(j, j + 1);
+                Ingredient ingredient = pKeys.get(s);
+                if (ingredient == null) {
+                    throw new JsonSyntaxException("Pattern references symbol '" + s + "' but it's not defined in the key");
+                }
+
+                set.remove(s);
+                nonnulllist.set(j + pPatternWidth * i, ingredient);
+            }
+        }
+
+        if (!set.isEmpty()) {
+            throw new JsonSyntaxException("Key defines symbols that aren't used in pattern: " + set);
+        } else {
+            return nonnulllist;
+        }
+    }
+    @VisibleForTesting
+    static String[] shrink(String... pToShrink) {
+        int i = Integer.MAX_VALUE;
+        int j = 0;
+        int k = 0;
+        int l = 0;
+
+        for(int i1 = 0; i1 < pToShrink.length; ++i1) {
+            String s = pToShrink[i1];
+            i = Math.min(i, firstNonSpace(s));
+            int j1 = lastNonSpace(s);
+            j = Math.max(j, j1);
+            if (j1 < 0) {
+                if (k == i1) {
+                    ++k;
+                }
+
+                ++l;
+            } else {
+                l = 0;
+            }
+        }
+
+        if (pToShrink.length == l) {
+            return new String[0];
+        } else {
+            String[] astring = new String[pToShrink.length - l - k];
+
+            for(int k1 = 0; k1 < astring.length; ++k1) {
+                astring[k1] = pToShrink[k1 + k].substring(i, j + 1);
+            }
+
+            return astring;
+        }
+    }
+
+    private static int firstNonSpace(String pEntry) {
+        int i;
+        for(i = 0; i < pEntry.length() && pEntry.charAt(i) == ' '; ++i) {
+        }
+
+        return i;
+    }
+
+    private static int lastNonSpace(String pEntry) {
+        int i;
+        for(i = pEntry.length() - 1; i >= 0 && pEntry.charAt(i) == ' '; --i) {
+        }
+
+        return i;
+    }
+
+    static String[] patternFromJson(JsonArray pPatternArray) {
+        String[] astring = new String[pPatternArray.size()];
+        if (astring.length > MAX_HEIGHT) {
+            throw new JsonSyntaxException("Invalid pattern: too many rows, " + MAX_HEIGHT + " is maximum");
+        } else if (astring.length == 0) {
+            throw new JsonSyntaxException("Invalid pattern: empty pattern not allowed");
+        } else {
+            for(int i = 0; i < astring.length; ++i) {
+                String s = GsonHelper.convertToString(pPatternArray.get(i), "pattern[" + i + "]");
+                if (s.length() > MAX_WIDTH) {
+                    throw new JsonSyntaxException("Invalid pattern: too many columns, " + MAX_WIDTH + " is maximum");
+                }
+
+                if (i > 0 && astring[0].length() != s.length()) {
+                    throw new JsonSyntaxException("Invalid pattern: each row must be the same width");
+                }
+
+                astring[i] = s;
+            }
+
+            return astring;
+        }
+    }
+
+    public static ItemStack itemStackFromJson(JsonObject pStackObject) {
+        return net.minecraftforge.common.crafting.CraftingHelper.getItemStack(pStackObject, true, true);
+    }
+    
 
     @Override
     public RecipeSerializer<?> getSerializer() {
@@ -115,49 +273,39 @@ public class TierOneShapedRecipe implements Recipe<CraftingContainer>{
 //        }
         @Override
         public TierOneShapedRecipe fromJson(ResourceLocation pRecipeId, JsonObject pJson) {
-            NonNullList<Ingredient> nonnulllist = itemsFromJson(GsonHelper.getAsJsonArray(pJson, "ingredients"));
-            if (nonnulllist.isEmpty()) {
-                throw new JsonParseException("No ingredients for shapeless recipe");
-            } else if (nonnulllist.size() > 9) {
-                throw new JsonParseException("Too many ingredients for shapeless recipe. The maximum is " + (9));
-            } else {
-                ItemStack itemstack = ShapedRecipe.itemStackFromJson(GsonHelper.getAsJsonObject(pJson, "result"));
-                return new TierOneShapedRecipe(pRecipeId, itemstack, nonnulllist);
-            }
-        }
-
-        private static NonNullList<Ingredient> itemsFromJson(JsonArray pIngredientArray) {
-            NonNullList<Ingredient> nonnulllist = NonNullList.create();
-
-            for(int i = 0; i < pIngredientArray.size(); ++i) {
-                Ingredient ingredient = Ingredient.fromJson(pIngredientArray.get(i));
-                if (true || !ingredient.isEmpty()) { // FORGE: Skip checking if an ingredient is empty during shapeless recipe deserialization to prevent complex ingredients from caching tags too early. Can not be done using a config value due to sync issues.
-                    nonnulllist.add(ingredient);
-                }
-            }
-
-            return nonnulllist;
+            Map<String, Ingredient> map = TierOneShapedRecipe.keyFromJson(GsonHelper.getAsJsonObject(pJson, "key"));
+            String[] astring = TierOneShapedRecipe.shrink(TierOneShapedRecipe.patternFromJson(GsonHelper.getAsJsonArray(pJson, "pattern")));
+            int i = astring[0].length();
+            int j = astring.length;
+            NonNullList<Ingredient> nonnulllist = TierOneShapedRecipe.dissolvePattern(astring, map, i, j);
+            ItemStack itemstack = TierOneShapedRecipe.itemStackFromJson(GsonHelper.getAsJsonObject(pJson, "result"));
+            return new TierOneShapedRecipe(pRecipeId, i, j, nonnulllist, itemstack);
         }
 
         @Override
         public @Nullable TierOneShapedRecipe fromNetwork(ResourceLocation id, FriendlyByteBuf buf) {
-            NonNullList<Ingredient> inputs = NonNullList.withSize(buf.readInt(), Ingredient.EMPTY);
+            int i = buf.readVarInt();
+            int j = buf.readVarInt();
+            String s = buf.readUtf();
+            NonNullList<Ingredient> nonnulllist = NonNullList.withSize(i * j, Ingredient.EMPTY);
 
-            for (int i = 0; i < inputs.size(); i++) {
-                inputs.set(i, Ingredient.fromNetwork(buf));
+            for(int k = 0; k < nonnulllist.size(); ++k) {
+                nonnulllist.set(k, Ingredient.fromNetwork(buf));
             }
 
-            ItemStack output = buf.readItem();
-            return new TierOneShapedRecipe(id, output, inputs);
+            ItemStack itemstack = buf.readItem();
+            return new TierOneShapedRecipe(id, i, j, nonnulllist, itemstack);
         }
         @Override
-        public void toNetwork(FriendlyByteBuf buf, TierOneShapedRecipe recipe) {
-            buf.writeInt(recipe.getIngredients().size());
+        public void toNetwork(FriendlyByteBuf buf, TierOneShapedRecipe pRecipe) {
+            buf.writeVarInt(pRecipe.width);
+            buf.writeVarInt(pRecipe.height);
 
-            for (Ingredient ing : recipe.getIngredients()) {
-                ing.toNetwork(buf);
+            for(Ingredient ingredient : pRecipe.recipeItems) {
+                ingredient.toNetwork(buf);
             }
-            buf.writeItemStack(recipe.getResultItem(), false);
+
+            buf.writeItem(pRecipe.output);
         }
     }
     }

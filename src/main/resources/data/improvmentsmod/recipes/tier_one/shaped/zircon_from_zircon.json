@@ -1,12 +1,14 @@
 {
   "type": "extendedmod:workbench_one_shaped",
-  "ingredients": [
-    {
+  "key": {
+    "S": {
       "item": "extendedmod:zircon"
     }
+  },
+  "pattern": [
+    "SSS"
   ],
   "result": {
-    "item": "extendedmod:zircon",
-    "count": 1
+    "item": "minecraft:amethyst_block"
   }
 }

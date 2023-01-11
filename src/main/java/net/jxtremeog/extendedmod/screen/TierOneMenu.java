@@ -1,6 +1,7 @@
 package net.jxtremeog.extendedmod.screen;
 
-import net.jxtremeog.extendedmod.recipe.TierOneRecipe;
+import net.jxtremeog.extendedmod.recipe.TierOneShapedRecipe;
+import net.jxtremeog.extendedmod.recipe.TierOneShapelessRecipe;
 import net.jxtremeog.extendedmod.world.inventory.ModResultSlot;
 import net.minecraft.network.protocol.game.ClientboundContainerSetSlotPacket;
 import net.minecraft.resources.ResourceLocation;
@@ -70,7 +71,8 @@ public class TierOneMenu extends RecipeBookMenu<CraftingContainer> {
             //RECIPE
             // TierOneRecipe.Type.WORKBENCH_ONE
             // RecipeType.CRAFTING
-            Optional<TierOneRecipe> optional = pLevel.getServer().getRecipeManager().getRecipeFor(TierOneRecipe.Type.WORKBENCH_ONE, pContainer, pLevel);
+            Optional<TierOneShapelessRecipe> optional = pLevel.getServer().getRecipeManager().getRecipeFor(TierOneShapelessRecipe.Type.WORKBENCH_ONE_SHAPELESS, pContainer, pLevel);
+            //CRAFTING SHAPELESS TIER ONE
             if (optional.isPresent()) {
                 // && (optional.get().getId() + "").contains("tier_one")
 
@@ -79,30 +81,51 @@ public class TierOneMenu extends RecipeBookMenu<CraftingContainer> {
                 //currentRecipe used in ModResultSlot class
                 currentRecipe = optional.get().getId();
 
-                TierOneRecipe craftingrecipe = optional.get();
+                TierOneShapelessRecipe craftingrecipe = optional.get();
                 if (pResult.setRecipeUsed(pLevel, serverplayer, craftingrecipe)) {
                     //RESULT
                     itemstack = craftingrecipe.assemble(pContainer);
                 }
-            } else {
-                //CRAFTING VANILLA
-                Optional<CraftingRecipe> optional2 = pLevel.getServer().getRecipeManager().getRecipeFor(RecipeType.CRAFTING, pContainer, pLevel);
+            }
+            else{
+                Optional<TierOneShapedRecipe> optional2 = pLevel.getServer().getRecipeManager().getRecipeFor(TierOneShapedRecipe.Type.WORKBENCH_ONE_SHAPED, pContainer, pLevel);
                 System.out.println(optional2);
+                //CRAFTING SHAPED TIER ONE
                 if (optional2.isPresent()) {
                     // && (optional.get().getId() + "").contains("tier_one")
 
-                    System.out.println(optional2.get().getId());
+                    System.out.println("Recipe detected "+optional2.get().getId());
 
                     //currentRecipe used in ModResultSlot class
                     currentRecipe = optional2.get().getId();
 
-                    CraftingRecipe craftingrecipe = optional2.get();
+                    TierOneShapedRecipe craftingrecipe = optional2.get();
                     if (pResult.setRecipeUsed(pLevel, serverplayer, craftingrecipe)) {
                         //RESULT
                         itemstack = craftingrecipe.assemble(pContainer);
                     }
                 }
+                else {
+                    //CRAFTING VANILLA
+                    Optional<CraftingRecipe> optional3 = pLevel.getServer().getRecipeManager().getRecipeFor(RecipeType.CRAFTING, pContainer, pLevel);
+                    System.out.println(optional3);
+                    if (optional3.isPresent()) {
+                        // && (optional.get().getId() + "").contains("tier_one")
+
+                        System.out.println("Recipe detected "+optional3.get().getId());
+
+                        //currentRecipe used in ModResultSlot class
+                        currentRecipe = optional3.get().getId();
+
+                        CraftingRecipe craftingrecipe = optional3.get();
+                        if (pResult.setRecipeUsed(pLevel, serverplayer, craftingrecipe)) {
+                            //RESULT
+                            itemstack = craftingrecipe.assemble(pContainer);
+                        }
+                    }
+                }
             }
+
 
             pResult.setItem(0, itemstack);
             pMenu.setRemoteSlot(0, itemstack);

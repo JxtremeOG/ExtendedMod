@@ -1,0 +1,12 @@
+{
+  "type": "extendedmod:workbench_one_shaped",
+  "ingredients": [
+    {
+      "item": "extendedmod:zircon"
+    }
+  ],
+  "result": {
+    "item": "extendedmod:zircon",
+    "count": 1
+  }
+}

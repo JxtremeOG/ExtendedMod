@@ -7,7 +7,7 @@ import mezz.jei.api.registration.IRecipeCategoryRegistration;
 import mezz.jei.api.registration.IRecipeRegistration;
 import net.jxtremeog.extendedmod.ExtendedMod;
 import net.jxtremeog.extendedmod.recipe.TempRecipe;
-import net.jxtremeog.extendedmod.recipe.TierOneRecipe;
+import net.jxtremeog.extendedmod.recipe.TierOneShapelessRecipe;
 import net.minecraft.client.Minecraft;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.crafting.RecipeManager;
@@ -20,8 +20,8 @@ public class JEIExtendedModPlugin implements IModPlugin {
 
     public static RecipeType<TempRecipe> TEMP_TYPE =
             new RecipeType<>(TempRecipeCategory.UID, TempRecipe.class);
-    public static RecipeType<TierOneRecipe> TIER_ONE_TYPE =
-            new RecipeType<>(TierOneRecipeCategory.UID, TierOneRecipe.class);
+    public static RecipeType<TierOneShapelessRecipe> TIER_ONE_TYPE =
+            new RecipeType<>(TierOneRecipeCategory.UID, TierOneShapelessRecipe.class);
     @Override
     public ResourceLocation getPluginUid() {
         return new ResourceLocation(ExtendedMod.MOD_ID,"jei_plugin");
@@ -43,7 +43,7 @@ public class JEIExtendedModPlugin implements IModPlugin {
         List<TempRecipe> recipesInfusing = rm.getAllRecipesFor(TempRecipe.Type.INSTANCE);
         registration.addRecipes(TEMP_TYPE, recipesInfusing);
 
-        List<TierOneRecipe> recipesTierOne = rm.getAllRecipesFor(TierOneRecipe.Type.WORKBENCH_ONE);
+        List<TierOneShapelessRecipe> recipesTierOne = rm.getAllRecipesFor(TierOneShapelessRecipe.Type.WORKBENCH_ONE_SHAPELESS);
         registration.addRecipes(TIER_ONE_TYPE, recipesTierOne);
     }
 }

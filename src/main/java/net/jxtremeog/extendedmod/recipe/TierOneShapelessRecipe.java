@@ -9,7 +9,6 @@ import net.minecraft.core.NonNullList;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.GsonHelper;
-import net.minecraft.world.ContainerHelper;
 import net.minecraft.world.entity.player.StackedContents;
 import net.minecraft.world.inventory.CraftingContainer;
 import net.minecraft.world.item.ItemStack;
@@ -18,14 +17,14 @@ import net.minecraft.world.level.Level;
 
 import javax.annotation.Nullable;
 
-public class TierOneRecipe implements Recipe<CraftingContainer>{
+public class TierOneShapelessRecipe implements Recipe<CraftingContainer>{
     //implements Recipe<CraftingContainer>
     private final ResourceLocation id;
     private final ItemStack output;
     private final NonNullList<Ingredient> recipeItems;
     private final boolean isSimple;
 
-    public TierOneRecipe(ResourceLocation id, ItemStack output,
+    public TierOneShapelessRecipe(ResourceLocation id, ItemStack output,
                                     NonNullList<Ingredient> recipeItems) {
 //        super(id); Needs to extend CustomRecipe to implement
         this.id = id;
@@ -84,26 +83,26 @@ public class TierOneRecipe implements Recipe<CraftingContainer>{
 
     @Override
     public RecipeSerializer<?> getSerializer() {
-        return Serializer.WORKBENCH_ONE;
+        return Serializer.WORKBENCH_ONE_SHAPELESS;
     }
 
     @Override
     public RecipeType<?> getType() {
-        return Type.WORKBENCH_ONE;
+        return Type.WORKBENCH_ONE_SHAPELESS;
     }
 
-    public static class Type implements RecipeType<TierOneRecipe> {
+    public static class Type implements RecipeType<TierOneShapelessRecipe> {
         private Type() { }
-        public static final Type WORKBENCH_ONE = new Type();
-        public static final String ID = "workbench_one";
+        public static final Type WORKBENCH_ONE_SHAPELESS = new Type();
+        public static final String ID = "workbench_one_shapeless";
     }
 
-    public static class Serializer implements RecipeSerializer<TierOneRecipe> {
-        public static final Serializer WORKBENCH_ONE = new Serializer();
+    public static class Serializer implements RecipeSerializer<TierOneShapelessRecipe> {
+        public static final Serializer WORKBENCH_ONE_SHAPELESS = new Serializer();
         public static final ResourceLocation ID =
-                new ResourceLocation(ExtendedMod.MOD_ID, "workbench_one");
+                new ResourceLocation(ExtendedMod.MOD_ID, "workbench_one_shapeless");
 
-        @Override
+        //OLD
 //        public TierOneRecipe fromJson(ResourceLocation pRecipeId, JsonObject pSerializedRecipe) {
 //            JsonArray ingredients = GsonHelper.getAsJsonArray(pSerializedRecipe, "ingredients");
 //            NonNullList<Ingredient> inputs = NonNullList.withSize(/*AMOUNT OF INGREDIENTS*/2, Ingredient.EMPTY);
@@ -114,8 +113,8 @@ public class TierOneRecipe implements Recipe<CraftingContainer>{
 //            ItemStack itemstack = ShapedRecipe.itemStackFromJson(GsonHelper.getAsJsonObject(pSerializedRecipe, "result"));
 //            return new TierOneRecipe(pRecipeId,itemstack, inputs);
 //        }
-
-        public TierOneRecipe fromJson(ResourceLocation pRecipeId, JsonObject pJson) {
+        @Override
+        public TierOneShapelessRecipe fromJson(ResourceLocation pRecipeId, JsonObject pJson) {
             NonNullList<Ingredient> nonnulllist = itemsFromJson(GsonHelper.getAsJsonArray(pJson, "ingredients"));
             if (nonnulllist.isEmpty()) {
                 throw new JsonParseException("No ingredients for shapeless recipe");
@@ -123,7 +122,7 @@ public class TierOneRecipe implements Recipe<CraftingContainer>{
                 throw new JsonParseException("Too many ingredients for shapeless recipe. The maximum is " + (9));
             } else {
                 ItemStack itemstack = ShapedRecipe.itemStackFromJson(GsonHelper.getAsJsonObject(pJson, "result"));
-                return new TierOneRecipe(pRecipeId, itemstack, nonnulllist);
+                return new TierOneShapelessRecipe(pRecipeId, itemstack, nonnulllist);
             }
         }
 
@@ -141,7 +140,7 @@ public class TierOneRecipe implements Recipe<CraftingContainer>{
         }
 
         @Override
-        public @Nullable TierOneRecipe fromNetwork(ResourceLocation id, FriendlyByteBuf buf) {
+        public @Nullable TierOneShapelessRecipe fromNetwork(ResourceLocation id, FriendlyByteBuf buf) {
             NonNullList<Ingredient> inputs = NonNullList.withSize(buf.readInt(), Ingredient.EMPTY);
 
             for (int i = 0; i < inputs.size(); i++) {
@@ -149,10 +148,10 @@ public class TierOneRecipe implements Recipe<CraftingContainer>{
             }
 
             ItemStack output = buf.readItem();
-            return new TierOneRecipe(id, output, inputs);
+            return new TierOneShapelessRecipe(id, output, inputs);
         }
         @Override
-        public void toNetwork(FriendlyByteBuf buf, TierOneRecipe recipe) {
+        public void toNetwork(FriendlyByteBuf buf, TierOneShapelessRecipe recipe) {
             buf.writeInt(recipe.getIngredients().size());
 
             for (Ingredient ing : recipe.getIngredients()) {

@@ -34,9 +34,19 @@ public class ModBlocks {
     public static final RegistryObject<Block> TEMP = registerBlock("temp",
             () -> new TempBlock(BlockBehaviour.Properties.of(Material.METAL)
                     .strength(6f).requiresCorrectToolForDrops()), ModCreativeModeTab.EXTENDED_TAB);
+
     public static final RegistryObject<Block> TIERONE = registerBlock("tierone_table",
             () -> new TierOneBlock(BlockBehaviour.Properties.of(Material.METAL)
                     .strength(6f).requiresCorrectToolForDrops()), ModCreativeModeTab.EXTENDED_TAB);
+
+    public static final RegistryObject<Block> TIERTWO = registerBlock("tiertwo_table",
+            () -> new Block(BlockBehaviour.Properties.of(Material.METAL)
+                    .strength(6f).requiresCorrectToolForDrops()), ModCreativeModeTab.EXTENDED_TAB);
+
+    public static final RegistryObject<Block> TIERTHREE = registerBlock("tierthree_table",
+            () -> new Block(BlockBehaviour.Properties.of(Material.METAL)
+                    .strength(6f).requiresCorrectToolForDrops()), ModCreativeModeTab.EXTENDED_TAB);
+
     //Quartz Ore
     public static final RegistryObject<Block> QUARTZ_ORE = registerBlock("quartz_ore",
             () -> new DropExperienceBlock(BlockBehaviour.Properties.of(Material.STONE)

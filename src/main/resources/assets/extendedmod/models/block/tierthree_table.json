@@ -1,0 +1,12 @@
+{
+  "parent": "minecraft:block/cube",
+  "textures": {
+    "down": "minecraft:block/oak_planks",
+    "east": "extendedmod:block/tierthree_table_side",
+    "north": "extendedmod:block/tierthree_table_front",
+    "particle": "extendedmod:block/tierthree_table_front",
+    "south": "extendedmod:block/tierthree_table_side",
+    "up": "extendedmod:block/tierthree_table_top",
+    "west": "extendedmod:block/tierthree_table_front"
+  }
+}

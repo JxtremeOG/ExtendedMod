@@ -1,5 +1,6 @@
 package net.jxtremeog.extendedmod.world.inventory;
 
+import net.jxtremeog.extendedmod.recipe.TierOneRecipe;
 import net.jxtremeog.extendedmod.recipe.TierOneShapedRecipe;
 import net.jxtremeog.extendedmod.recipe.TierOneShapelessRecipe;
 import net.minecraft.core.NonNullList;
@@ -78,8 +79,8 @@ public class ModResultSlot extends Slot {
         this.checkTakeAchievements(pStack);
         net.minecraftforge.common.ForgeHooks.setCraftingPlayer(pPlayer);
 
-        NonNullList<ItemStack> nonnulllist = ((currentRecipe+"").contains("tier_one")) ? (currentRecipe+"").contains("shaped") ? pPlayer.level.getRecipeManager().getRemainingItemsFor(TierOneShapedRecipe.Type.WORKBENCH_ONE_SHAPED, this.craftSlots, pPlayer.level) :
-                pPlayer.level.getRecipeManager().getRemainingItemsFor(TierOneShapelessRecipe.Type.WORKBENCH_ONE_SHAPELESS, this.craftSlots, pPlayer.level) :
+        NonNullList<ItemStack> nonnulllist = ((currentRecipe+"").contains("tier_one")) ? (currentRecipe+"").contains("shaped") ? pPlayer.level.getRecipeManager().getRemainingItemsFor(TierOneRecipe.Type.WORKBENCH_ONE, this.craftSlots, pPlayer.level) :
+                pPlayer.level.getRecipeManager().getRemainingItemsFor(TierOneRecipe.Type.WORKBENCH_ONE, this.craftSlots, pPlayer.level) :
                 pPlayer.level.getRecipeManager().getRemainingItemsFor(RecipeType.CRAFTING, this.craftSlots, pPlayer.level);
 
         net.minecraftforge.common.ForgeHooks.setCraftingPlayer(null);

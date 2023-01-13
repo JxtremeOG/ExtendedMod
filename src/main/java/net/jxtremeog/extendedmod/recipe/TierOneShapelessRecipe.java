@@ -17,7 +17,7 @@ import net.minecraft.world.level.Level;
 
 import javax.annotation.Nullable;
 
-public class TierOneShapelessRecipe implements Recipe<CraftingContainer>{
+public class TierOneShapelessRecipe implements TierOneRecipe{
     //implements Recipe<CraftingContainer>
     private final ResourceLocation id;
     private final ItemStack output;
@@ -84,17 +84,6 @@ public class TierOneShapelessRecipe implements Recipe<CraftingContainer>{
     @Override
     public RecipeSerializer<?> getSerializer() {
         return Serializer.WORKBENCH_ONE_SHAPELESS;
-    }
-
-    @Override
-    public RecipeType<?> getType() {
-        return Type.WORKBENCH_ONE_SHAPELESS;
-    }
-
-    public static class Type implements RecipeType<TierOneShapelessRecipe> {
-        private Type() { }
-        public static final Type WORKBENCH_ONE_SHAPELESS = new Type();
-        public static final String ID = "workbench_one_shapeless";
     }
 
     public static class Serializer implements RecipeSerializer<TierOneShapelessRecipe> {

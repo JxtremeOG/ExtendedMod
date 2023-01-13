@@ -20,7 +20,7 @@ import javax.annotation.Nullable;
 import java.util.Map;
 import java.util.Set;
 
-public class TierOneShapedRecipe implements Recipe<CraftingContainer>{
+public class TierOneShapedRecipe implements TierOneRecipe{
     static int MAX_WIDTH = 3;
     static int MAX_HEIGHT = 3;
 
@@ -242,17 +242,6 @@ public class TierOneShapedRecipe implements Recipe<CraftingContainer>{
     @Override
     public RecipeSerializer<?> getSerializer() {
         return Serializer.WORKBENCH_ONE_SHAPED;
-    }
-
-    @Override
-    public RecipeType<?> getType() {
-        return Type.WORKBENCH_ONE_SHAPED;
-    }
-
-    public static class Type implements RecipeType<TierOneShapedRecipe> {
-        private Type() { }
-        public static final Type WORKBENCH_ONE_SHAPED = new Type();
-        public static final String ID = "workbench_one_shaped";
     }
 
     public static class Serializer implements RecipeSerializer<TierOneShapedRecipe> {

@@ -17,19 +17,24 @@ import net.jxtremeog.extendedmod.ExtendedMod;
 import net.jxtremeog.extendedmod.block.ModBlocks;
 import net.jxtremeog.extendedmod.recipe.TempRecipe;
 import net.jxtremeog.extendedmod.recipe.TierOneRecipe;
+import net.jxtremeog.extendedmod.recipe.TierOneShapedRecipe;
+import net.jxtremeog.extendedmod.recipe.TierOneShapelessRecipe;
+import net.minecraft.core.NonNullList;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.CraftingRecipe;
+import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.Recipe;
 import org.jetbrains.annotations.Nullable;
+
 
 import java.util.List;
 import java.util.Optional;
 import java.util.function.Function;
 import java.util.function.Predicate;
 
-public class TierOneRecipeCategory implements IRecipeCategory<TierOneRecipe> {
+public class TierOneRecipeCategory implements IExtendableRecipeCategory<TierOneRecipe, ICraftingCategoryExtension>{
     public final static ResourceLocation UID = new ResourceLocation(ExtendedMod.MOD_ID, "workbench_one");
     public final static ResourceLocation TEXTURE =
             new ResourceLocation(ExtendedMod.MOD_ID, "textures/gui/tier_one_table_gui.png");
@@ -64,23 +69,55 @@ public class TierOneRecipeCategory implements IRecipeCategory<TierOneRecipe> {
         return this.icon;
     }
 
+
     @Override
     public void setRecipe(IRecipeLayoutBuilder builder, TierOneRecipe recipe, IFocusGroup focuses) {
+        WorkbenchShapedIngredientLocation slotLocations;
+        String recipeId = recipe.getId()+"";
+        if(recipeId.contains("shaped")){
+            int test = recipeId.indexOf("shaped")+7;
+            //GETS THE ENUM NAME
+            slotLocations = WorkbenchShapedIngredientLocation.valueOf((recipeId.substring(recipeId.indexOf("shaped")+7).toUpperCase()));
+            //USES THE NAME TO GET SLOT LOCATIONS FOR INGREDIENTS
+            for(int ingredient = 0; ingredient<slotLocations.getSlotLocations().length(); ingredient++){
+                int xLoc = 30;
+                int yLoc = 17;
+                int slotNum = Integer.parseInt(slotLocations.getSlotLocations().substring(ingredient,ingredient+1));
+                for(int x = 0; x<slotNum; x++){
+                    xLoc+=18;
+                    if(xLoc == 84){
+                        xLoc=30;
+                        yLoc+=18;
+                    }
+                }
+                builder.addSlot(RecipeIngredientRole.INPUT, xLoc, yLoc).addIngredients(recipe.getIngredients().get(ingredient));
+            }
 
-
-        System.out.println(recipe.getIngredients().size());
-        int xLoc = 30;
-        int yLoc = 17;
-        for(int ingredient = 0; ingredient<recipe.getIngredients().size(); ingredient++){
-            builder.addSlot(RecipeIngredientRole.INPUT, xLoc, yLoc).addIngredients(recipe.getIngredients().get(ingredient));
-            xLoc+=18;
-            if(xLoc == 82){
-                xLoc=30;
-                yLoc+=18;
+        }else{
+            int xLoc = 30;
+            int yLoc = 17;
+            for(int ingredient = 0; ingredient<recipe.getIngredients().size(); ingredient++){
+                System.out.println(recipe.getIngredients().get(ingredient));
+                System.out.println("Resource Location "+recipe.getId());
+                builder.addSlot(RecipeIngredientRole.INPUT, xLoc, yLoc).addIngredients(recipe.getIngredients().get(ingredient));
+                xLoc+=18;
+                if(xLoc == 84){
+                    xLoc=30;
+                    yLoc+=18;
+                }
             }
         }
-//        builder.addSlot(RecipeIngredientRole.INPUT, 48, 35).addIngredients(recipe.getIngredients().get(0));
 
         builder.addSlot(RecipeIngredientRole.OUTPUT, 124, 35).addItemStack(recipe.getResultItem());
+    }
+
+    @Override
+    public <R extends TierOneRecipe> void addCategoryExtension(Class<? extends R> recipeClass, Function<R, ? extends ICraftingCategoryExtension> extensionFactory) {
+
+    }
+
+    @Override
+    public <R extends TierOneRecipe> void addCategoryExtension(Class<? extends R> recipeClass, Predicate<R> extensionFilter, Function<R, ? extends ICraftingCategoryExtension> extensionFactory) {
+
     }
 }

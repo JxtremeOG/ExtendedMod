@@ -78,7 +78,6 @@ public class ModResultSlot extends Slot {
     public void onTake(Player pPlayer, ItemStack pStack) {
         this.checkTakeAchievements(pStack);
         net.minecraftforge.common.ForgeHooks.setCraftingPlayer(pPlayer);
-
         NonNullList<ItemStack> nonnulllist = ((currentRecipe+"").contains("tier_one")) ? (currentRecipe+"").contains("shaped") ? pPlayer.level.getRecipeManager().getRemainingItemsFor(TierOneRecipe.Type.WORKBENCH_ONE, this.craftSlots, pPlayer.level) :
                 pPlayer.level.getRecipeManager().getRemainingItemsFor(TierOneRecipe.Type.WORKBENCH_ONE, this.craftSlots, pPlayer.level) :
                 pPlayer.level.getRecipeManager().getRemainingItemsFor(RecipeType.CRAFTING, this.craftSlots, pPlayer.level);

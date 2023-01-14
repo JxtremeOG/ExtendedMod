@@ -44,6 +44,14 @@ public class TierOneShapedRecipe implements TierOneRecipe{
         this.recipeItems = recipeItems;
     }
 
+    public int getWidth() {
+        return width;
+    }
+
+    public int getHeight() {
+        return height;
+    }
+
     @Override
     /**
      * Used to check if a recipe matches current crafting inventory

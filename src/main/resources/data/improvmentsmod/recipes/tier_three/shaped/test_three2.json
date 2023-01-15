@@ -6,7 +6,9 @@
     }
   },
   "pattern": [
-    "SSS"
+    "S  ",
+    "S  ",
+    "S  "
   ],
   "result": {
     "item": "minecraft:amethyst_block"

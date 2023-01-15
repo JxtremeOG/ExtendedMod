@@ -91,17 +91,6 @@ public class TierOneShapelessRecipe implements TierOneRecipe{
         public static final ResourceLocation ID =
                 new ResourceLocation(ExtendedMod.MOD_ID, "workbench_one_shapeless");
 
-        //OLD
-//        public TierOneRecipe fromJson(ResourceLocation pRecipeId, JsonObject pSerializedRecipe) {
-//            JsonArray ingredients = GsonHelper.getAsJsonArray(pSerializedRecipe, "ingredients");
-//            NonNullList<Ingredient> inputs = NonNullList.withSize(/*AMOUNT OF INGREDIENTS*/2, Ingredient.EMPTY);
-//
-//            for (int i = 0; i < inputs.size(); i++) {
-//                inputs.set(i, Ingredient.fromJson(ingredients.get(i)));
-//            }
-//            ItemStack itemstack = ShapedRecipe.itemStackFromJson(GsonHelper.getAsJsonObject(pSerializedRecipe, "result"));
-//            return new TierOneRecipe(pRecipeId,itemstack, inputs);
-//        }
         @Override
         public TierOneShapelessRecipe fromJson(ResourceLocation pRecipeId, JsonObject pJson) {
             NonNullList<Ingredient> nonnulllist = itemsFromJson(GsonHelper.getAsJsonArray(pJson, "ingredients"));

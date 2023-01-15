@@ -70,7 +70,7 @@ public class TierTwoMenu extends RecipeBookMenu<CraftingContainer> {
             // TierOneRecipe.Type.WORKBENCH_ONE
             // RecipeType.CRAFTING
 
-            Optional<TierTwoShapedRecipe> optional = pLevel.getServer().getRecipeManager().getRecipeFor(TierTwoShapedRecipe.Type.WORKBENCH_TWO_SHAPED, pContainer, pLevel);
+            Optional<TierTwoRecipe> optional = pLevel.getServer().getRecipeManager().getRecipeFor(TierTwoShapedRecipe.Type.WORKBENCH_TWO, pContainer, pLevel);
             //CRAFTING SHAPELESS TIER ONE
             if (optional.isPresent()) {
                 // && (optional.get().getId() + "").contains("tier_one")
@@ -80,80 +80,44 @@ public class TierTwoMenu extends RecipeBookMenu<CraftingContainer> {
                 //currentRecipe used in ModResultSlot class
                 currentRecipe = optional.get().getId();
 
-                TierTwoShapedRecipe craftingrecipe = optional.get();
+                TierTwoRecipe craftingrecipe = optional.get();
                 if (pResult.setRecipeUsed(pLevel, serverplayer, craftingrecipe)) {
                     //RESULT
                     itemstack = craftingrecipe.assemble(pContainer);
                 }
-            }
-            else {
-                Optional<TierTwoShapelessRecipe> optional2 = pLevel.getServer().getRecipeManager().getRecipeFor(TierTwoShapelessRecipe.Type.WORKBENCH_TWO_SHAPELESS, pContainer, pLevel);
-                System.out.println(optional2);
+            } else {
+                Optional<TierOneRecipe> optional4 = pLevel.getServer().getRecipeManager().getRecipeFor(TierOneRecipe.Type.WORKBENCH_ONE, pContainer, pLevel);
+                System.out.println(optional4);
                 //CRAFTING SHAPED TIER ONE
-                if (optional2.isPresent()) {
+                if (optional4.isPresent()) {
                     // && (optional.get().getId() + "").contains("tier_one")
 
-                    System.out.println("Recipe detected " + optional2.get().getId());
+                    System.out.println("Recipe detected " + optional4.get().getId());
 
                     //currentRecipe used in ModResultSlot class
-                    currentRecipe = optional2.get().getId();
+                    currentRecipe = optional4.get().getId();
 
-                    TierTwoShapelessRecipe craftingrecipe = optional2.get();
+                    TierOneRecipe craftingrecipe = optional4.get();
                     if (pResult.setRecipeUsed(pLevel, serverplayer, craftingrecipe)) {
                         //RESULT
                         itemstack = craftingrecipe.assemble(pContainer);
                     }
                 } else {
-                    Optional<TierOneRecipe> optional3 = pLevel.getServer().getRecipeManager().getRecipeFor(TierOneRecipe.Type.WORKBENCH_ONE, pContainer, pLevel);
-                    System.out.println(optional3);
-                    if (optional3.isPresent()) {
+                    //CRAFTING VANILLA
+                    Optional<CraftingRecipe> optional5 = pLevel.getServer().getRecipeManager().getRecipeFor(RecipeType.CRAFTING, pContainer, pLevel);
+                    System.out.println(optional5);
+                    if (optional5.isPresent()) {
                         // && (optional.get().getId() + "").contains("tier_one")
 
-                        System.out.println("Recipe detected " + optional3.get().getId());
+                        System.out.println("Recipe detected " + optional5.get().getId());
 
                         //currentRecipe used in ModResultSlot class
-                        currentRecipe = optional3.get().getId();
+                        currentRecipe = optional5.get().getId();
 
-                        TierOneRecipe craftingrecipe = optional3.get();
+                        CraftingRecipe craftingrecipe = optional5.get();
                         if (pResult.setRecipeUsed(pLevel, serverplayer, craftingrecipe)) {
                             //RESULT
                             itemstack = craftingrecipe.assemble(pContainer);
-                        }
-                    } else {
-                        Optional<TierOneRecipe> optional4 = pLevel.getServer().getRecipeManager().getRecipeFor(TierOneRecipe.Type.WORKBENCH_ONE, pContainer, pLevel);
-                        System.out.println(optional4);
-                        //CRAFTING SHAPED TIER ONE
-                        if (optional4.isPresent()) {
-                            // && (optional.get().getId() + "").contains("tier_one")
-
-                            System.out.println("Recipe detected " + optional4.get().getId());
-
-                            //currentRecipe used in ModResultSlot class
-                            currentRecipe = optional4.get().getId();
-
-                            TierOneRecipe craftingrecipe = optional4.get();
-                            if (pResult.setRecipeUsed(pLevel, serverplayer, craftingrecipe)) {
-                                //RESULT
-                                itemstack = craftingrecipe.assemble(pContainer);
-                            }
-                        } else {
-                            //CRAFTING VANILLA
-                            Optional<CraftingRecipe> optional5 = pLevel.getServer().getRecipeManager().getRecipeFor(RecipeType.CRAFTING, pContainer, pLevel);
-                            System.out.println(optional5);
-                            if (optional5.isPresent()) {
-                                // && (optional.get().getId() + "").contains("tier_one")
-
-                                System.out.println("Recipe detected " + optional5.get().getId());
-
-                                //currentRecipe used in ModResultSlot class
-                                currentRecipe = optional5.get().getId();
-
-                                CraftingRecipe craftingrecipe = optional5.get();
-                                if (pResult.setRecipeUsed(pLevel, serverplayer, craftingrecipe)) {
-                                    //RESULT
-                                    itemstack = craftingrecipe.assemble(pContainer);
-                                }
-                            }
                         }
                     }
                 }

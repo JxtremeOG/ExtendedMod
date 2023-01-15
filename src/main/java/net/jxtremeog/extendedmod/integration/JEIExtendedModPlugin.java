@@ -11,6 +11,8 @@ import mezz.jei.api.registration.IVanillaCategoryExtensionRegistration;
 import net.jxtremeog.extendedmod.ExtendedMod;
 import net.jxtremeog.extendedmod.recipe.TempRecipe;
 import net.jxtremeog.extendedmod.recipe.TierOneRecipe;
+import net.jxtremeog.extendedmod.recipe.TierThreeRecipe;
+import net.jxtremeog.extendedmod.recipe.TierTwoRecipe;
 import net.minecraft.client.Minecraft;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.crafting.CraftingRecipe;
@@ -26,6 +28,10 @@ public class JEIExtendedModPlugin implements IModPlugin {
             new RecipeType<>(TempRecipeCategory.UID, TempRecipe.class);
     public static RecipeType<TierOneRecipe> TIER_ONE_TYPE =
             new RecipeType<>(TierOneRecipeCategory.UID, TierOneRecipe.class);
+    public static RecipeType<TierTwoRecipe> TIER_TWO_TYPE =
+            new RecipeType<>(TierTwoRecipeCategory.UID, TierTwoRecipe.class);
+    public static RecipeType<TierThreeRecipe> TIER_THREE_TYPE =
+            new RecipeType<>(TierThreeRecipeCategory.UID, TierThreeRecipe.class);
     @Override
     public ResourceLocation getPluginUid() {
         return new ResourceLocation(ExtendedMod.MOD_ID,"jei_plugin");
@@ -39,6 +45,12 @@ public class JEIExtendedModPlugin implements IModPlugin {
 
         registration.addRecipeCategories(new
                 TierOneRecipeCategory(registration.getJeiHelpers().getGuiHelper()));
+
+        registration.addRecipeCategories(new
+                TierTwoRecipeCategory(registration.getJeiHelpers().getGuiHelper()));
+
+        registration.addRecipeCategories(new
+                TierThreeRecipeCategory(registration.getJeiHelpers().getGuiHelper()));
     }
 
     @Override
@@ -49,5 +61,11 @@ public class JEIExtendedModPlugin implements IModPlugin {
 
         List<TierOneRecipe> recipesTierOne = rm.getAllRecipesFor(TierOneRecipe.Type.WORKBENCH_ONE);
         registration.addRecipes(TIER_ONE_TYPE, recipesTierOne);
+
+        List<TierTwoRecipe> recipesTierTwo = rm.getAllRecipesFor(TierTwoRecipe.Type.WORKBENCH_TWO);
+        registration.addRecipes(TIER_TWO_TYPE, recipesTierTwo);
+
+        List<TierThreeRecipe> recipesTierThree = rm.getAllRecipesFor(TierThreeRecipe.Type.WORKBENCH_THREE);
+        registration.addRecipes(TIER_THREE_TYPE, recipesTierThree);
     }
 }

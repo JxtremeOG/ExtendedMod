@@ -17,7 +17,7 @@ import net.minecraft.world.level.Level;
 
 import javax.annotation.Nullable;
 
-public class TierThreeShapelessRecipe implements Recipe<CraftingContainer>{
+public class TierThreeShapelessRecipe implements TierThreeRecipe{
     //implements Recipe<CraftingContainer>
     private final ResourceLocation id;
     private final ItemStack output;
@@ -80,39 +80,15 @@ public class TierThreeShapelessRecipe implements Recipe<CraftingContainer>{
     public ResourceLocation getId() {
         return id;
     }
-
     @Override
     public RecipeSerializer<?> getSerializer() {
         return Serializer.WORKBENCH_THREE_SHAPELESS;
     }
-
-    @Override
-    public RecipeType<?> getType() {
-        return Type.WORKBENCH_THREE_SHAPELESS;
-    }
-
-    public static class Type implements RecipeType<TierThreeShapelessRecipe> {
-        private Type() { }
-        public static final Type WORKBENCH_THREE_SHAPELESS = new Type();
-        public static final String ID = "workbench_three_shapeless";
-    }
-
     public static class Serializer implements RecipeSerializer<TierThreeShapelessRecipe> {
         public static final Serializer WORKBENCH_THREE_SHAPELESS = new Serializer();
         public static final ResourceLocation ID =
                 new ResourceLocation(ExtendedMod.MOD_ID, "workbench_three_shapeless");
 
-        //OLD
-//        public TierOneRecipe fromJson(ResourceLocation pRecipeId, JsonObject pSerializedRecipe) {
-//            JsonArray ingredients = GsonHelper.getAsJsonArray(pSerializedRecipe, "ingredients");
-//            NonNullList<Ingredient> inputs = NonNullList.withSize(/*AMOUNT OF INGREDIENTS*/2, Ingredient.EMPTY);
-//
-//            for (int i = 0; i < inputs.size(); i++) {
-//                inputs.set(i, Ingredient.fromJson(ingredients.get(i)));
-//            }
-//            ItemStack itemstack = ShapedRecipe.itemStackFromJson(GsonHelper.getAsJsonObject(pSerializedRecipe, "result"));
-//            return new TierOneRecipe(pRecipeId,itemstack, inputs);
-//        }
         @Override
         public TierThreeShapelessRecipe fromJson(ResourceLocation pRecipeId, JsonObject pJson) {
             NonNullList<Ingredient> nonnulllist = itemsFromJson(GsonHelper.getAsJsonArray(pJson, "ingredients"));

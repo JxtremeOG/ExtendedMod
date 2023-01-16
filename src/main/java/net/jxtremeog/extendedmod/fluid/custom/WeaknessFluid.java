@@ -11,16 +11,16 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.FlowingFluid;
 import net.minecraftforge.registries.RegistryObject;
 
-public class RegenerationFluid extends LiquidBlock{
+public class WeaknessFluid extends LiquidBlock{
 
-    public RegenerationFluid(RegistryObject<FlowingFluid> fluid, Properties properties) {
+    public WeaknessFluid(RegistryObject<FlowingFluid> fluid, Properties properties) {
         super(fluid, properties);
     }
 
     @Override
     public void entityInside(BlockState state, Level level, BlockPos pos, Entity entity) {
         if(entity instanceof LivingEntity livingEntity){
-            livingEntity.addEffect(new MobEffectInstance(MobEffects.REGENERATION, 100));
+            livingEntity.addEffect(new MobEffectInstance(MobEffects.WEAKNESS, 100));
         }
         super.entityInside(state, level, pos, entity);
     }

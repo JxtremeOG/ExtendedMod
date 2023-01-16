@@ -68,6 +68,18 @@ public class ExtendedMod
         public static void onClientSetup(FMLClientSetupEvent event) {
             ItemBlockRenderTypes.setRenderLayer(ModFluids.SOURCE_REGENERATION.get(), RenderType.translucent());
             ItemBlockRenderTypes.setRenderLayer(ModFluids.FLOWING_REGENERATION.get(), RenderType.translucent());
+            ItemBlockRenderTypes.setRenderLayer(ModFluids.SOURCE_POISON.get(), RenderType.translucent());
+            ItemBlockRenderTypes.setRenderLayer(ModFluids.FLOWING_POISON.get(), RenderType.translucent());
+            ItemBlockRenderTypes.setRenderLayer(ModFluids.SOURCE_INVIS.get(), RenderType.translucent());
+            ItemBlockRenderTypes.setRenderLayer(ModFluids.FLOWING_INVIS.get(), RenderType.translucent());
+            ItemBlockRenderTypes.setRenderLayer(ModFluids.SOURCE_SWIFTNESS.get(), RenderType.translucent());
+            ItemBlockRenderTypes.setRenderLayer(ModFluids.FLOWING_SWIFTNESS.get(), RenderType.translucent());
+            ItemBlockRenderTypes.setRenderLayer(ModFluids.SOURCE_SLOWNESS.get(), RenderType.translucent());
+            ItemBlockRenderTypes.setRenderLayer(ModFluids.FLOWING_SLOWNESS.get(), RenderType.translucent());
+            ItemBlockRenderTypes.setRenderLayer(ModFluids.SOURCE_STRENGTH.get(), RenderType.translucent());
+            ItemBlockRenderTypes.setRenderLayer(ModFluids.FLOWING_STRENGTH.get(), RenderType.translucent());
+            ItemBlockRenderTypes.setRenderLayer(ModFluids.SOURCE_WEAKNESS.get(), RenderType.translucent());
+            ItemBlockRenderTypes.setRenderLayer(ModFluids.FLOWING_WEAKNESS.get(), RenderType.translucent());
 
             MenuScreens.register(ModMenuTypes.TEMP_MENU.get(), TempScreen::new);
         }

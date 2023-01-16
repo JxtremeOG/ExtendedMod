@@ -15,6 +15,13 @@
   "entity.minecraft.villager.extendedmod.cauldron_master": "Cauldron Master",
 
   "item.extendedmod.regeneration_bucket": "Bucket of Regeneration",
+  "item.extendedmod.poison_bucket": "Bucket of Poison",
+  "item.extendedmod.invis_bucket": "Bucket of Invisibility",
+  "item.extendedmod.swiftness_bucket": "Bucket of Swiftness",
+  "item.extendedmod.slowness_bucket": "Bucket of Slowness",
+  "item.extendedmod.strength_bucket": "Bucket of Strength",
+  "item.extendedmod.weakness_bucket": "Bucket of Weakness",
+
   "item.extendedmod.netherite_horse_armor": "Netherite Horse Armor",
 
   "block.extendedmod.temp": "Temp",

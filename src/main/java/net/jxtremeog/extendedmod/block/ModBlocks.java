@@ -3,7 +3,7 @@ package net.jxtremeog.extendedmod.block;
 import net.jxtremeog.extendedmod.ExtendedMod;
 import net.jxtremeog.extendedmod.block.custom.*;
 import net.jxtremeog.extendedmod.fluid.ModFluids;
-import net.jxtremeog.extendedmod.fluid.custom.RegenerationFluid;
+import net.jxtremeog.extendedmod.fluid.custom.*;
 import net.jxtremeog.extendedmod.item.ModCreativeModeTab;
 import net.jxtremeog.extendedmod.item.ModItems;
 import net.minecraft.util.valueproviders.UniformInt;
@@ -99,9 +99,33 @@ public class ModBlocks {
                     .lightLevel(state -> state.getValue(RedstoneLampColoredBlock.LIT) ? 15 : 0)),
             ModCreativeModeTab.EXTENDED_TAB);
 
-    //Regeneration
+    //Fluids
     public static final RegistryObject<LiquidBlock> REGENERATION_BLOCK = BLOCKS.register("regeneration_block",
             () -> new RegenerationFluid(ModFluids.SOURCE_REGENERATION,
+                    BlockBehaviour.Properties.copy(Blocks.WATER).jumpFactor(0)));
+
+    public static final RegistryObject<LiquidBlock> POISON_BLOCK = BLOCKS.register("poison_block",
+            () -> new PoisonFluid(ModFluids.SOURCE_POISON,
+                    BlockBehaviour.Properties.copy(Blocks.WATER).jumpFactor(0)));
+
+    public static final RegistryObject<LiquidBlock> INVIS_BLOCK = BLOCKS.register("invis_block",
+            () -> new InvisibilityFluid(ModFluids.SOURCE_INVIS,
+                    BlockBehaviour.Properties.copy(Blocks.WATER).jumpFactor(0)));
+
+    public static final RegistryObject<LiquidBlock> SWIFTNESS_BLOCK = BLOCKS.register("swiftness_block",
+            () -> new SwiftnessFluid(ModFluids.SOURCE_SWIFTNESS,
+                    BlockBehaviour.Properties.copy(Blocks.WATER).jumpFactor(0)));
+
+    public static final RegistryObject<LiquidBlock> SLOWNESS_BLOCK = BLOCKS.register("slowness_block",
+            () -> new SlownessFluid(ModFluids.SOURCE_SLOWNESS,
+                    BlockBehaviour.Properties.copy(Blocks.WATER).jumpFactor(0)));
+
+    public static final RegistryObject<LiquidBlock> STRENGTH_BLOCK = BLOCKS.register("strength_block",
+            () -> new StrengthFluid(ModFluids.SOURCE_STRENGTH,
+                    BlockBehaviour.Properties.copy(Blocks.WATER).jumpFactor(0)));
+
+    public static final RegistryObject<LiquidBlock> WEAKNESS_BLOCK = BLOCKS.register("weakness_block",
+            () -> new WeaknessFluid(ModFluids.SOURCE_WEAKNESS,
                     BlockBehaviour.Properties.copy(Blocks.WATER).jumpFactor(0)));
 
     //TUTORIAL

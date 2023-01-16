@@ -21,9 +21,39 @@ public class ModItems {
                     (new Item.Properties().tab(ModCreativeModeTab.EXTENDED_TAB)
                             .stacksTo(1))));
 
-    //Regeneration Bucket
+    //Fluid Bucket
     public static final RegistryObject<Item> REGENERATION_BUCKET = ITEMS.register("regeneration_bucket",
             () -> new BucketItem(ModFluids.SOURCE_REGENERATION,
+                    new Item.Properties().tab(ModCreativeModeTab.EXTENDED_TAB)
+                            .craftRemainder(Items.BUCKET).stacksTo(1)));
+
+    public static final RegistryObject<Item> POISON_BUCKET = ITEMS.register("poison_bucket",
+            () -> new BucketItem(ModFluids.SOURCE_POISON,
+                    new Item.Properties().tab(ModCreativeModeTab.EXTENDED_TAB)
+                            .craftRemainder(Items.BUCKET).stacksTo(1)));
+
+    public static final RegistryObject<Item> INVIS_BUCKET = ITEMS.register("invis_bucket",
+            () -> new BucketItem(ModFluids.SOURCE_INVIS,
+                    new Item.Properties().tab(ModCreativeModeTab.EXTENDED_TAB)
+                            .craftRemainder(Items.BUCKET).stacksTo(1)));
+
+    public static final RegistryObject<Item> SWIFTNESS_BUCKET = ITEMS.register("swiftness_bucket",
+            () -> new BucketItem(ModFluids.SOURCE_SWIFTNESS,
+                    new Item.Properties().tab(ModCreativeModeTab.EXTENDED_TAB)
+                            .craftRemainder(Items.BUCKET).stacksTo(1)));
+
+    public static final RegistryObject<Item> SLOWNESS_BUCKET = ITEMS.register("slowness_bucket",
+            () -> new BucketItem(ModFluids.SOURCE_SLOWNESS,
+                    new Item.Properties().tab(ModCreativeModeTab.EXTENDED_TAB)
+                            .craftRemainder(Items.BUCKET).stacksTo(1)));
+
+    public static final RegistryObject<Item> STRENGTH_BUCKET = ITEMS.register("strength_bucket",
+            () -> new BucketItem(ModFluids.SOURCE_STRENGTH,
+                    new Item.Properties().tab(ModCreativeModeTab.EXTENDED_TAB)
+                            .craftRemainder(Items.BUCKET).stacksTo(1)));
+
+    public static final RegistryObject<Item> WEAKNESS_BUCKET = ITEMS.register("weakness_bucket",
+            () -> new BucketItem(ModFluids.SOURCE_WEAKNESS,
                     new Item.Properties().tab(ModCreativeModeTab.EXTENDED_TAB)
                             .craftRemainder(Items.BUCKET).stacksTo(1)));
 

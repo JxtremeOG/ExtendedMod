@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "extendedmod:item/swiftness_bucket"
+  }
+}

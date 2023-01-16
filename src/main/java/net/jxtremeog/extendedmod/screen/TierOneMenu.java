@@ -1,14 +1,11 @@
 package net.jxtremeog.extendedmod.screen;
 
 import net.jxtremeog.extendedmod.recipe.TierOneRecipe;
-import net.jxtremeog.extendedmod.recipe.TierOneShapedRecipe;
-import net.jxtremeog.extendedmod.recipe.TierOneShapelessRecipe;
 import net.jxtremeog.extendedmod.world.inventory.ModResultSlot;
 import net.minecraft.network.protocol.game.ClientboundContainerSetSlotPacket;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.Container;
-import net.minecraft.world.ContainerHelper;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.player.StackedContents;
@@ -22,6 +19,8 @@ import net.minecraft.world.level.block.Blocks;
 
 import java.util.Optional;
 
+import static net.jxtremeog.extendedmod.world.inventory.ModResultSlot.currentRecipe;
+
 public class TierOneMenu extends RecipeBookMenu<CraftingContainer> {
     public static final int RESULT_SLOT = 0;
     private static final int CRAFT_SLOT_START = 1;
@@ -34,7 +33,6 @@ public class TierOneMenu extends RecipeBookMenu<CraftingContainer> {
     public final ResultContainer resultSlots = new ResultContainer();
     private final ContainerLevelAccess access;
     private final Player player;
-    public static ResourceLocation currentRecipe;
 
     public TierOneMenu(int pContainerId, Inventory pPlayerInventory) {
         this(pContainerId, pPlayerInventory, ContainerLevelAccess.NULL);
@@ -79,11 +77,11 @@ public class TierOneMenu extends RecipeBookMenu<CraftingContainer> {
 
                 System.out.println("Recipe detected "+optional.get().getId());
 
-                //currentRecipe used in ModResultSlot class
-                currentRecipe = optional.get().getId();
 
                 TierOneRecipe craftingrecipe = optional.get();
                 if (pResult.setRecipeUsed(pLevel, serverplayer, craftingrecipe)) {
+                    //currentRecipe used in ModResultSlot class
+                    currentRecipe = optional.get().getId();
                     //RESULT
                     itemstack = craftingrecipe.assemble(pContainer);
                 }
@@ -97,11 +95,11 @@ public class TierOneMenu extends RecipeBookMenu<CraftingContainer> {
 
                     System.out.println("Recipe detected "+optional3.get().getId());
 
-                    //currentRecipe used in ModResultSlot class
-                    currentRecipe = optional3.get().getId();
 
                     CraftingRecipe craftingrecipe = optional3.get();
                     if (pResult.setRecipeUsed(pLevel, serverplayer, craftingrecipe)) {
+                        //currentRecipe used in ModResultSlot class
+                        currentRecipe = optional3.get().getId();
                         //RESULT
                         itemstack = craftingrecipe.assemble(pContainer);
                     }

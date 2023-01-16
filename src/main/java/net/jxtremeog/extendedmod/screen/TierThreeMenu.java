@@ -19,6 +19,8 @@ import net.minecraft.world.level.block.Blocks;
 
 import java.util.Optional;
 
+import static net.jxtremeog.extendedmod.world.inventory.ModResultSlot.currentRecipe;
+
 public class TierThreeMenu extends RecipeBookMenu<CraftingContainer> {
     public static final int RESULT_SLOT = 0;
     private static final int CRAFT_SLOT_START = 1;
@@ -31,7 +33,6 @@ public class TierThreeMenu extends RecipeBookMenu<CraftingContainer> {
     public final ResultContainer resultSlots = new ResultContainer();
     private final ContainerLevelAccess access;
     private final Player player;
-    public static ResourceLocation currentRecipe;
 
     public TierThreeMenu(int pContainerId, Inventory pPlayerInventory) {
         this(pContainerId, pPlayerInventory, ContainerLevelAccess.NULL);
@@ -70,70 +71,65 @@ public class TierThreeMenu extends RecipeBookMenu<CraftingContainer> {
             // TierOneRecipe.Type.WORKBENCH_ONE
             // RecipeType.CRAFTING
 
-            Optional<TierThreeRecipe> optional6 = pLevel.getServer().getRecipeManager().getRecipeFor(TierThreeShapedRecipe.Type.WORKBENCH_THREE, pContainer, pLevel);
-            //CRAFTING SHAPELESS TIER ONE
-            if (optional6.isPresent()) {
-                // && (optional.get().getId() + "").contains("tier_one")
-
-                System.out.println("Recipe detected "+optional6.get().getId());
-
-                //currentRecipe used in ModResultSlot class
-                currentRecipe = optional6.get().getId();
-
-                TierThreeRecipe craftingrecipe = optional6.get();
-                if (pResult.setRecipeUsed(pLevel, serverplayer, craftingrecipe)) {
-                    //RESULT
-                    itemstack = craftingrecipe.assemble(pContainer);
-                }
-            }
-
-            Optional<TierTwoRecipe> optional = pLevel.getServer().getRecipeManager().getRecipeFor(TierTwoShapedRecipe.Type.WORKBENCH_TWO, pContainer, pLevel);
+            Optional<TierThreeRecipe> optional = pLevel.getServer().getRecipeManager().getRecipeFor(TierThreeRecipe.Type.WORKBENCH_THREE, pContainer, pLevel);
             //CRAFTING SHAPELESS TIER ONE
             if (optional.isPresent()) {
                 // && (optional.get().getId() + "").contains("tier_one")
 
                 System.out.println("Recipe detected "+optional.get().getId());
 
-                //currentRecipe used in ModResultSlot class
-                currentRecipe = optional.get().getId();
 
-                TierTwoRecipe craftingrecipe = optional.get();
+                TierThreeRecipe craftingrecipe = optional.get();
                 if (pResult.setRecipeUsed(pLevel, serverplayer, craftingrecipe)) {
+                    //currentRecipe used in ModResultSlot class
+                    currentRecipe = optional.get().getId();
                     //RESULT
                     itemstack = craftingrecipe.assemble(pContainer);
                 }
-            } else {
-                Optional<TierOneRecipe> optional2 = pLevel.getServer().getRecipeManager().getRecipeFor(TierOneRecipe.Type.WORKBENCH_ONE, pContainer, pLevel);
-                System.out.println(optional2);
-                //CRAFTING SHAPED TIER ONE
-                if (optional2.isPresent()) {
-                    // && (optional.get().getId() + "").contains("tier_one")
+            }
+            else {
+                Optional<TierTwoRecipe> optional2 = pLevel.getServer().getRecipeManager().getRecipeFor(TierTwoRecipe.Type.WORKBENCH_TWO, pContainer, pLevel);
+                if(optional2.isPresent()){
 
-                    System.out.println("Recipe detected " + optional2.get().getId());
+                    System.out.println("Recipe detected "+optional2.get().getId());
 
-                    //currentRecipe used in ModResultSlot class
-                    currentRecipe = optional2.get().getId();
 
-                    TierOneRecipe craftingrecipe = optional2.get();
+                    TierTwoRecipe craftingrecipe = optional2.get();
                     if (pResult.setRecipeUsed(pLevel, serverplayer, craftingrecipe)) {
+                        //currentRecipe used in ModResultSlot class
+                        currentRecipe = optional2.get().getId();
                         //RESULT
                         itemstack = craftingrecipe.assemble(pContainer);
                     }
-                } else {
-                    Optional<CraftingRecipe> optional3 = pLevel.getServer().getRecipeManager().getRecipeFor(RecipeType.CRAFTING, pContainer, pLevel);
-                    System.out.println(optional3);
-                    if (optional3.isPresent()) {
-                        // && (optional.get().getId() + "").contains("tier_one")
+                }else{
+                    Optional<TierOneRecipe> optional3 = pLevel.getServer().getRecipeManager().getRecipeFor(TierOneRecipe.Type.WORKBENCH_ONE, pContainer, pLevel);
+                    if(optional3.isPresent()){
+                        System.out.println("Recipe detected "+optional3.get().getId());
 
-                        System.out.println("Recipe detected " + optional3.get().getId());
 
-                        //currentRecipe used in ModResultSlot class
-                        currentRecipe = optional3.get().getId();
-
-                        CraftingRecipe craftingrecipe = optional3.get();
+                        TierOneRecipe craftingrecipe = optional3.get();
                         if (pResult.setRecipeUsed(pLevel, serverplayer, craftingrecipe)) {
+                            //currentRecipe used in ModResultSlot class
+                            currentRecipe = optional3.get().getId();
                             //RESULT
                             itemstack = craftingrecipe.assemble(pContainer);
+                        }
+                    }
+                    else{
+                        Optional<CraftingRecipe> optional4 = pLevel.getServer().getRecipeManager().getRecipeFor(RecipeType.CRAFTING, pContainer, pLevel);
+                        if (optional4.isPresent()) {
+                            // && (optional.get().getId() + "").contains("tier_one")
+
+                            System.out.println("Recipe detected "+optional4.get().getId());
+
+
+                            CraftingRecipe craftingrecipe = optional4.get();
+                            if (pResult.setRecipeUsed(pLevel, serverplayer, craftingrecipe)) {
+                                //currentRecipe used in ModResultSlot class
+                                currentRecipe = optional4.get().getId();
+                                //RESULT
+                                itemstack = craftingrecipe.assemble(pContainer);
+                            }
                         }
                     }
                 }

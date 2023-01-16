@@ -1,9 +1,8 @@
 package net.jxtremeog.extendedmod.world.inventory;
 
-import net.jxtremeog.extendedmod.recipe.TierOneRecipe;
-import net.jxtremeog.extendedmod.recipe.TierOneShapedRecipe;
-import net.jxtremeog.extendedmod.recipe.TierOneShapelessRecipe;
+import net.jxtremeog.extendedmod.recipe.*;
 import net.minecraft.core.NonNullList;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.Container;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.CraftingContainer;
@@ -15,12 +14,11 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.Optional;
 
-import static net.jxtremeog.extendedmod.screen.TierOneMenu.currentRecipe;
-
 public class ModResultSlot extends Slot {
     private final CraftingContainer craftSlots;
     private final Player player;
     private int removeCount;
+    public static ResourceLocation currentRecipe = null;
 
     public ModResultSlot(Player pPlayer, CraftingContainer pCraftSlots, Container pContainer, int pSlot, int pXPosition, int pYPosition) {
         super(pContainer, pSlot, pXPosition, pYPosition);
@@ -78,10 +76,17 @@ public class ModResultSlot extends Slot {
     public void onTake(Player pPlayer, ItemStack pStack) {
         this.checkTakeAchievements(pStack);
         net.minecraftforge.common.ForgeHooks.setCraftingPlayer(pPlayer);
-        NonNullList<ItemStack> nonnulllist = ((currentRecipe+"").contains("tier_one")) ? (currentRecipe+"").contains("shaped") ? pPlayer.level.getRecipeManager().getRemainingItemsFor(TierOneRecipe.Type.WORKBENCH_ONE, this.craftSlots, pPlayer.level) :
-                pPlayer.level.getRecipeManager().getRemainingItemsFor(TierOneRecipe.Type.WORKBENCH_ONE, this.craftSlots, pPlayer.level) :
-                pPlayer.level.getRecipeManager().getRemainingItemsFor(RecipeType.CRAFTING, this.craftSlots, pPlayer.level);
-
+        NonNullList<ItemStack> nonnulllist = null;
+        System.out.println("Current Recipe "+currentRecipe);
+        if((currentRecipe+"").contains("tier_three")){
+            nonnulllist = pPlayer.level.getRecipeManager().getRemainingItemsFor(TierThreeRecipe.Type.WORKBENCH_THREE, this.craftSlots, pPlayer.level);
+        } else if ((currentRecipe+"").contains("tier_two")) {
+            nonnulllist = pPlayer.level.getRecipeManager().getRemainingItemsFor(TierTwoRecipe.Type.WORKBENCH_TWO, this.craftSlots, pPlayer.level);
+        } else if ((currentRecipe+"").contains("tier_one")) {
+            nonnulllist = pPlayer.level.getRecipeManager().getRemainingItemsFor(TierOneRecipe.Type.WORKBENCH_ONE, this.craftSlots, pPlayer.level);
+        } else{
+            nonnulllist = pPlayer.level.getRecipeManager().getRemainingItemsFor(RecipeType.CRAFTING, this.craftSlots, pPlayer.level);
+        }
         net.minecraftforge.common.ForgeHooks.setCraftingPlayer(null);
         for(int i = 0; i < nonnulllist.size(); ++i) {
             ItemStack itemstack = this.craftSlots.getItem(i);

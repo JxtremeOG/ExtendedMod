@@ -1,18 +1,19 @@
 {
   "type": "extendedmod:workbench_one_shaped",
   "key": {
-    "X": {
-      "item": "minecraft:iron_nugget"
+    "W": {
+      "tag": "minecraft:planks"
     },
-    "#": {
+    "o": {
       "item": "minecraft:iron_ingot"
     }
   },
   "pattern": [
-    "X#X",
-    "X X"
+    "WoW",
+    "WWW",
+    " W "
   ],
   "result": {
-    "item": "minecraft:chainmail_helmet"
+    "item": "minecraft:shield"
   }
 }

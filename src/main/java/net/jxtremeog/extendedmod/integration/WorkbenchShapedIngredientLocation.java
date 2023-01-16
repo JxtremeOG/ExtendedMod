@@ -19,6 +19,7 @@ public enum WorkbenchShapedIngredientLocation {
     CHAINMAIL_CHESTPLATE("012345678"),
     CHAINMAIL_HELMET("012345"),
     CROSSBOW("012345678"),
+    SHIELD("012345678"),
 
     //TIER TWO
     TEST_TWO2("036"),

@@ -6,6 +6,7 @@ import net.jxtremeog.extendedmod.block.entity.ModBlockEntities;
 import net.jxtremeog.extendedmod.fluid.ModFluidTypes;
 import net.jxtremeog.extendedmod.fluid.ModFluids;
 import net.jxtremeog.extendedmod.item.ModItems;
+import net.jxtremeog.extendedmod.loot.ModLootModifiers;
 import net.jxtremeog.extendedmod.recipe.ModRecipes;
 import net.jxtremeog.extendedmod.screen.ModMenuTypes;
 import net.jxtremeog.extendedmod.screen.TempScreen;
@@ -49,6 +50,8 @@ public class ExtendedMod
         ModMenuTypes.register(modEventBus);
 
         ModRecipes.register(modEventBus);
+
+        ModLootModifiers.register(modEventBus);
 
         modEventBus.addListener(this::commonSetup);
 

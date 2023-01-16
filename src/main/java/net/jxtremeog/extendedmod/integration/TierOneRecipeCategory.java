@@ -83,6 +83,7 @@ public class TierOneRecipeCategory implements IExtendableRecipeCategory<TierOneR
                 int xLoc = 30;
                 int yLoc = 17;
                 int slotNum = Integer.parseInt(slotLocations.getSlotLocations().substring(ingredient,ingredient+1));
+                System.out.println("slotNum "+slotNum);
                 for(int x = 0; x<slotNum; x++){
                     xLoc+=18;
                     if(xLoc == 84){
@@ -90,6 +91,10 @@ public class TierOneRecipeCategory implements IExtendableRecipeCategory<TierOneR
                         yLoc+=18;
                     }
                 }
+                System.out.println("xLoc "+xLoc);
+                System.out.println("yLoc "+yLoc);
+                System.out.println("Ingredient "+recipe.getIngredients().get(ingredient));
+                System.out.println("Ingredient list "+recipe.getIngredients());
                 builder.addSlot(RecipeIngredientRole.INPUT, xLoc, yLoc).addIngredients(recipe.getIngredients().get(ingredient));
             }
 

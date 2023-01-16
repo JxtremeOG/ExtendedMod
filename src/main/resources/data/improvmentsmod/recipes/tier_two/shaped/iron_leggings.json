@@ -1,0 +1,16 @@
+{
+  "type": "extendedmod:workbench_two_shaped",
+  "key": {
+    "X": {
+      "item": "minecraft:iron_ingot"
+    }
+  },
+  "pattern": [
+    "XXX",
+    "X X",
+    "X X"
+  ],
+  "result": {
+    "item": "minecraft:iron_leggings"
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "type": "extendedmod:workbench_three_shaped",
+  "key": {
+    "X": {
+      "item": "minecraft:diamond"
+    }
+  },
+  "pattern": [
+    "XXX",
+    "X X"
+  ],
+  "result": {
+    "item": "minecraft:diamond_helmet"
+  }
+}

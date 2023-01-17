@@ -76,9 +76,6 @@ public class TierThreeMenu extends RecipeBookMenu<CraftingContainer> {
             if (optional.isPresent()) {
                 // && (optional.get().getId() + "").contains("tier_one")
 
-                System.out.println("Recipe detected "+optional.get().getId());
-
-
                 TierThreeRecipe craftingrecipe = optional.get();
                 if (pResult.setRecipeUsed(pLevel, serverplayer, craftingrecipe)) {
                     //currentRecipe used in ModResultSlot class
@@ -91,9 +88,6 @@ public class TierThreeMenu extends RecipeBookMenu<CraftingContainer> {
                 Optional<TierTwoRecipe> optional2 = pLevel.getServer().getRecipeManager().getRecipeFor(TierTwoRecipe.Type.WORKBENCH_TWO, pContainer, pLevel);
                 if(optional2.isPresent()){
 
-                    System.out.println("Recipe detected "+optional2.get().getId());
-
-
                     TierTwoRecipe craftingrecipe = optional2.get();
                     if (pResult.setRecipeUsed(pLevel, serverplayer, craftingrecipe)) {
                         //currentRecipe used in ModResultSlot class
@@ -104,8 +98,6 @@ public class TierThreeMenu extends RecipeBookMenu<CraftingContainer> {
                 }else{
                     Optional<TierOneRecipe> optional3 = pLevel.getServer().getRecipeManager().getRecipeFor(TierOneRecipe.Type.WORKBENCH_ONE, pContainer, pLevel);
                     if(optional3.isPresent()){
-                        System.out.println("Recipe detected "+optional3.get().getId());
-
 
                         TierOneRecipe craftingrecipe = optional3.get();
                         if (pResult.setRecipeUsed(pLevel, serverplayer, craftingrecipe)) {
@@ -119,8 +111,6 @@ public class TierThreeMenu extends RecipeBookMenu<CraftingContainer> {
                         Optional<CraftingRecipe> optional4 = pLevel.getServer().getRecipeManager().getRecipeFor(RecipeType.CRAFTING, pContainer, pLevel);
                         if (optional4.isPresent()) {
                             // && (optional.get().getId() + "").contains("tier_one")
-
-                            System.out.println("Recipe detected "+optional4.get().getId());
 
 
                             CraftingRecipe craftingrecipe = optional4.get();
@@ -258,7 +248,6 @@ public class TierThreeMenu extends RecipeBookMenu<CraftingContainer> {
     }
 
     public RecipeBookType getRecipeBookType() {
-        System.out.println("getRecipeBookType "+RecipeBookType.CRAFTING);
         return RecipeBookType.CRAFTING;
     }
 

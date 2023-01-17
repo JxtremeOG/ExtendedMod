@@ -1,0 +1,10 @@
+{
+  "type": "extendedmod:improved_blueprint_in_shipwreck",
+  "conditions": [
+    {
+      "condition": "forge:loot_table_id",
+      "loot_table_id": "minecraft:chests/shipwreck_teasure"
+    }
+  ],
+  "item": "extendedmod:workbench_two_blueprint"
+}

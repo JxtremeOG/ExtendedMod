@@ -77,7 +77,6 @@ public class ModResultSlot extends Slot {
         this.checkTakeAchievements(pStack);
         net.minecraftforge.common.ForgeHooks.setCraftingPlayer(pPlayer);
         NonNullList<ItemStack> nonnulllist = null;
-        System.out.println("Current Recipe "+currentRecipe);
         if((currentRecipe+"").contains("tier_three")){
             nonnulllist = pPlayer.level.getRecipeManager().getRemainingItemsFor(TierThreeRecipe.Type.WORKBENCH_THREE, this.craftSlots, pPlayer.level);
         } else if ((currentRecipe+"").contains("tier_two")) {

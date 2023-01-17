@@ -1,0 +1,23 @@
+{
+  "replace": true,
+  "type": "extendedmod:workbench_two_shaped",
+  "key": {
+    "S": {
+      "item": "minecraft:iron_block"
+    },
+    "I": {
+      "item": "minecraft:diamond"
+    },
+    "#": {
+      "item": "extendedmod:workbench_three_blueprint"
+    }
+  },
+  "pattern": [
+    "III",
+    "I#I",
+    "SSS"
+  ],
+  "result": {
+    "item": "extendedmod:tierthree_table"
+  }
+}

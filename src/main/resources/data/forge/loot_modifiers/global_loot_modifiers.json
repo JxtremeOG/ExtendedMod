@@ -1,0 +1,14 @@
+{
+  "replace": false,
+  "entries": [
+    "extendedmod:improved_blueprint_in_mineshaft",
+    "extendedmod:improved_blueprint_in_temple",
+    "extendedmod:improved_blueprint_in_dungeon",
+    "extendedmod:improved_blueprint_in_pyramid",
+    "extendedmod:improved_blueprint_in_shipwreck",
+
+    "extendedmod:advanced_blueprint_in_bastion",
+    "extendedmod:advanced_blueprint_in_ancient"
+
+  ]
+}

@@ -22,12 +22,14 @@
   "item.extendedmod.strength_bucket": "Bucket of Strength",
   "item.extendedmod.weakness_bucket": "Bucket of Weakness",
 
+  "item.extendedmod.workbench_two_blueprint": "Improved Workbench Blueprint",
+  "item.extendedmod.workbench_three_blueprint": "Advanced Workbench Blueprint",
   "item.extendedmod.netherite_horse_armor": "Netherite Horse Armor",
 
   "block.extendedmod.temp": "Temp",
-  "block.extendedmod.tierone_table": "Tier 1 Workbench",
-  "block.extendedmod.tiertwo_table": "Tier 2 Workbench",
-  "block.extendedmod.tierthree_table": "Tier 3 Workbench",
+  "block.extendedmod.tierone_table": "Workbench",
+  "block.extendedmod.tiertwo_table": "Improved Workbench",
+  "block.extendedmod.tierthree_table": "Advanced Workbench",
   "block.extendedmod.quartz_ore": "Quartz Ore",
   "block.extendedmod.deepslate_quartz_ore": "Deepslate Quartz Ore",
   "block.extendedmod.nether_coal_ore": "Nether Coal Ore",

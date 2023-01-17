@@ -76,9 +76,6 @@ public class TierTwoMenu extends RecipeBookMenu<CraftingContainer> {
             if (optional.isPresent()) {
                 // && (optional.get().getId() + "").contains("tier_one")
 
-                System.out.println("Recipe detected "+optional.get().getId());
-
-
                 TierTwoRecipe craftingrecipe = optional.get();
                 if (pResult.setRecipeUsed(pLevel, serverplayer, craftingrecipe)) {
                     //currentRecipe used in ModResultSlot class
@@ -92,9 +89,6 @@ public class TierTwoMenu extends RecipeBookMenu<CraftingContainer> {
                 if (optional2.isPresent()) {
                     // && (optional.get().getId() + "").contains("tier_one")
 
-                    System.out.println("Recipe detected " + optional2.get().getId());
-
-
                     TierOneRecipe craftingrecipe = optional2.get();
                     if (pResult.setRecipeUsed(pLevel, serverplayer, craftingrecipe)) {
                         //currentRecipe used in ModResultSlot class
@@ -105,11 +99,8 @@ public class TierTwoMenu extends RecipeBookMenu<CraftingContainer> {
                 } else {
                     //CRAFTING VANILLA
                     Optional<CraftingRecipe> optional3 = pLevel.getServer().getRecipeManager().getRecipeFor(RecipeType.CRAFTING, pContainer, pLevel);
-                    System.out.println(optional3);
                     if (optional3.isPresent()) {
                         // && (optional.get().getId() + "").contains("tier_one")
-
-                        System.out.println("Recipe detected " + optional3.get().getId());
 
 
                         CraftingRecipe craftingrecipe = optional3.get();
@@ -246,7 +237,6 @@ public class TierTwoMenu extends RecipeBookMenu<CraftingContainer> {
     }
 
     public RecipeBookType getRecipeBookType() {
-        System.out.println("getRecipeBookType "+RecipeBookType.CRAFTING);
         return RecipeBookType.CRAFTING;
     }
 

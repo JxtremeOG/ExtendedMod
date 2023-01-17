@@ -20,6 +20,10 @@ public class ModItems {
             () -> new HorseArmorItem(11, "netherite",
                     (new Item.Properties().tab(ModCreativeModeTab.EXTENDED_TAB)
                             .stacksTo(1))));
+    public static final RegistryObject<Item> WORKBENCH_TWO_BLUEPRINT = ITEMS.register("workbench_two_blueprint",
+            () -> new Item(new Item.Properties().tab(ModCreativeModeTab.EXTENDED_TAB)));
+    public static final RegistryObject<Item> WORKBENCH_THREE_BLUEPRINT = ITEMS.register("workbench_three_blueprint",
+            () -> new Item(new Item.Properties().tab(ModCreativeModeTab.EXTENDED_TAB)));
 
     //Fluid Bucket
     public static final RegistryObject<Item> REGENERATION_BUCKET = ITEMS.register("regeneration_bucket",

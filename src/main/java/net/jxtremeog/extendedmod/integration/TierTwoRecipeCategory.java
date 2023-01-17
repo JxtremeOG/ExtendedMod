@@ -83,8 +83,6 @@ public class TierTwoRecipeCategory implements IExtendableRecipeCategory<TierTwoR
             int xLoc = 30;
             int yLoc = 17;
             for(int ingredient = 0; ingredient<recipe.getIngredients().size(); ingredient++){
-                System.out.println(recipe.getIngredients().get(ingredient));
-                System.out.println("Resource Location "+recipe.getId());
                 builder.addSlot(RecipeIngredientRole.INPUT, xLoc, yLoc).addIngredients(recipe.getIngredients().get(ingredient));
                 xLoc+=18;
                 if(xLoc == 84){

@@ -1,0 +1,10 @@
+{
+  "type": "extendedmod:improved_blueprint_in_temple",
+  "conditions": [
+    {
+      "condition": "forge:loot_table_id",
+      "loot_table_id": "minecraft:chests/jungle_temple"
+    }
+  ],
+  "item": "extendedmod:workbench_two_blueprint"
+}

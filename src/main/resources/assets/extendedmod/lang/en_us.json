@@ -40,6 +40,8 @@
   "block.extendedmod.nether_lapis_ore": "Nether Lapis Ore",
   "block.extendedmod.nether_copper_ore": "Nether Copper Ore",
   "block.extendedmod.redstone_lamp_red": "Red Redstone Lamp",
+  "block.extendedmod.worked_wood": "Worked Wood",
+  "block.extendedmod.worked_stone": "Worked Stone",
 
   "key.category.extendedmod.tutorial": "Test Mod",
   "key,extendedmod.test": "Test"

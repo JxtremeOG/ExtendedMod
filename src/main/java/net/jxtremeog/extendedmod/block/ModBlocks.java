@@ -99,6 +99,15 @@ public class ModBlocks {
                     .lightLevel(state -> state.getValue(RedstoneLampColoredBlock.LIT) ? 15 : 0)),
             ModCreativeModeTab.EXTENDED_TAB);
 
+    public static final RegistryObject<Block> WORKED_WOOD = registerBlock("worked_wood",
+            () -> new DropExperienceBlock(BlockBehaviour.Properties.of(Material.WOOD)
+                    .strength(6f), UniformInt.of(3,7)), ModCreativeModeTab.EXTENDED_TAB);
+
+    public static final RegistryObject<Block> WORKED_STONE = registerBlock("worked_stone",
+            () -> new DropExperienceBlock(BlockBehaviour.Properties.of(Material.STONE)
+                    .strength(6f).requiresCorrectToolForDrops(),
+                    UniformInt.of(3,7)), ModCreativeModeTab.EXTENDED_TAB);
+
     //Fluids
     public static final RegistryObject<LiquidBlock> REGENERATION_BLOCK = BLOCKS.register("regeneration_block",
             () -> new RegenerationFluid(ModFluids.SOURCE_REGENERATION,

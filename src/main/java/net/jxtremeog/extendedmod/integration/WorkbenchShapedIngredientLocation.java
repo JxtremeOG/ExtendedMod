@@ -21,6 +21,7 @@ public enum WorkbenchShapedIngredientLocation {
     CROSSBOW("012345678"),
     SHIELD("012345678"),
     WORKBENCH_TWO("012345678"),
+    WORKBENCH_TWO_BLUEPRINT("012345678"),
 
     //TIER TWO
     TEST_TWO2("036"),

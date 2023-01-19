@@ -1,0 +1,28 @@
+{
+  "type": "extendedmod:workbench_one_shaped",
+  "key": {
+    "P": {
+      "item": "minecraft:paper"
+    },
+    "L": {
+      "item": "minecraft:lapis_lazuli"
+    },
+    "B": {
+      "item": "minecraft:light_blue_dye"
+    },
+    "C": {
+      "item": "minecraft:blue_dye"
+    },
+    "#": {
+      "item": "minecraft:prismarine_crystals"
+    }
+  },
+  "pattern": [
+    " # ",
+    "BPC",
+    " L "
+  ],
+  "result": {
+    "item": "extendedmod:workbench_two_blueprint"
+  }
+}

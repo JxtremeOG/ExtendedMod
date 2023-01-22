@@ -1,0 +1,6 @@
+{
+  "variants": {
+    "axis=z": {"model": "extendedmod:block/jx_portal_ew"},
+    "axis=x": {"model": "extendedmod:block/jx_portal_ns"}
+  }
+}

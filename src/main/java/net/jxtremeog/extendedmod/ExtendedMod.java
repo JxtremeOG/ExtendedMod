@@ -10,6 +10,7 @@ import net.jxtremeog.extendedmod.loot.ModLootModifiers;
 import net.jxtremeog.extendedmod.recipe.ModRecipes;
 import net.jxtremeog.extendedmod.screen.ModMenuTypes;
 import net.jxtremeog.extendedmod.screen.TempScreen;
+import net.jxtremeog.extendedmod.villager.ModPOIs;
 import net.jxtremeog.extendedmod.villager.ModVillagers;
 import net.jxtremeog.extendedmod.world.dimension.ModDimensions;
 import net.jxtremeog.extendedmod.world.feature.ModConfiguredFeatures;
@@ -42,6 +43,7 @@ public class ExtendedMod
         ModVillagers.register(modEventBus);
 
         ModDimensions.register();
+        ModPOIs.register(modEventBus);
 
         ModConfiguredFeatures.register(modEventBus);
         ModPlacedFeatures.register(modEventBus);

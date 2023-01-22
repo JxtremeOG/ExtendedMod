@@ -108,6 +108,11 @@ public class ModBlocks {
                     .strength(6f).requiresCorrectToolForDrops(),
                     UniformInt.of(3,7)), ModCreativeModeTab.EXTENDED_TAB);
 
+
+    //PORTAL
+    public static final RegistryObject<Block> JX_PORTAL = registerBlockWithoutBlockItem("jx_portal",
+            JXPortalBlock::new);
+
     //Fluids
     public static final RegistryObject<LiquidBlock> REGENERATION_BLOCK = BLOCKS.register("regeneration_block",
             () -> new RegenerationFluid(ModFluids.SOURCE_REGENERATION,
@@ -167,6 +172,10 @@ public class ModBlocks {
         RegistryObject<T> toReturn = BLOCKS.register(name, block);
         registerBlockItem(name, toReturn, tab);
         return toReturn;
+    }
+
+    private static <T extends Block> RegistryObject<T> registerBlockWithoutBlockItem(String name, Supplier<T> block) {
+        return BLOCKS.register(name, block);
     }
 
     private static <T extends Block> RegistryObject<Item> registerBlockItem(String name, RegistryObject<T> block,

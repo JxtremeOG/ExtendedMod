@@ -1,7 +1,7 @@
 {
   "parent": "minecraft:block/cube",
   "textures": {
-    "down": "minecraft:block/mangrove_planks",
+    "down": "minecraft:block/mangrove_log",
     "east": "extendedmod:block/workbench_one_side",
     "north": "extendedmod:block/workbench_one_front",
     "particle": "extendedmod:block/workbench_one_front",

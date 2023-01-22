@@ -1,12 +1,12 @@
 {
   "parent": "minecraft:block/cube",
   "textures": {
-    "down": "minecraft:block/oak_planks",
-    "east": "extendedmod:block/tiertwo_table_side",
-    "north": "extendedmod:block/tiertwo_table_front",
-    "particle": "extendedmod:block/tiertwo_table_front",
-    "south": "extendedmod:block/tiertwo_table_side",
-    "up": "extendedmod:block/tiertwo_table_top",
-    "west": "extendedmod:block/tiertwo_table_front"
+    "down": "minecraft:block/blast_furnace_top",
+    "east": "extendedmod:block/workbench_two_side",
+    "north": "extendedmod:block/workbench_two_front",
+    "particle": "extendedmod:block/workbench_two_front",
+    "south": "extendedmod:block/workbench_two_side",
+    "up": "extendedmod:block/workbench_two_top",
+    "west": "extendedmod:block/workbench_two_front"
   }
 }

@@ -1,0 +1,24 @@
+{
+  "type": "extendedmod:workbench_two_shaped",
+  "key": {
+    "B": {
+      "item": "extendedmod:workbench_two_blueprint"
+    },
+    "M": {
+      "item": "minecraft:magma_cream"
+    },
+    "G": {
+      "item": "minecraft:glowstone_dust"
+    },
+    "N": {
+      "item": "minecraft:nether_wart"
+    }
+  },
+  "pattern": [
+    " G ",
+    "NBM"
+  ],
+  "result": {
+    "item": "extendedmod:workbench_three_blueprint"
+  }
+}

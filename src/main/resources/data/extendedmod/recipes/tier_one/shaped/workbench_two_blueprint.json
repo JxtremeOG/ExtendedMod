@@ -10,17 +10,13 @@
     "B": {
       "item": "minecraft:light_blue_dye"
     },
-    "C": {
-      "item": "minecraft:blue_dye"
-    },
     "#": {
-      "item": "minecraft:prismarine_crystals"
+      "item": "minecraft:glow_ink_sac"
     }
   },
   "pattern": [
     " # ",
-    "BPC",
-    " L "
+    "BPL"
   ],
   "result": {
     "item": "extendedmod:workbench_two_blueprint"

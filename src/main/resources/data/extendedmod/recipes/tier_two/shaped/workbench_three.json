@@ -2,20 +2,20 @@
   "replace": true,
   "type": "extendedmod:workbench_two_shaped",
   "key": {
-    "S": {
+    "I": {
       "item": "minecraft:iron_block"
     },
-    "I": {
-      "item": "minecraft:diamond"
+    "A": {
+      "item": "minecraft:amethyst_shard"
     },
     "#": {
       "item": "extendedmod:workbench_three_blueprint"
     }
   },
   "pattern": [
-    "III",
+    "AIA",
     "I#I",
-    "SSS"
+    "AIA"
   ],
   "result": {
     "item": "extendedmod:tierthree_table"

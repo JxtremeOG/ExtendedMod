@@ -21,7 +21,7 @@ public enum WorkbenchShapedIngredientLocation {
     CROSSBOW("012345678"),
     SHIELD("012345678"),
     WORKBENCH_TWO("012345678"),
-    WORKBENCH_TWO_BLUEPRINT("012345678"),
+    WORKBENCH_TWO_BLUEPRINT("012345"),
 
     //TIER TWO
     TEST_TWO2("036"),
@@ -39,6 +39,7 @@ public enum WorkbenchShapedIngredientLocation {
     IRON_CHESTPLATE("012345678"),
     IRON_HELMET("012345"),
     WORKBENCH_THREE("012345678"),
+    WORKBENCH_THREE_BLUEPRINT("012345"),
 
     //TIER THREE
     DIAMOND_BOOTS("345678"),

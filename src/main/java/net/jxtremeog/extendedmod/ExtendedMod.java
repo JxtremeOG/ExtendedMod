@@ -11,6 +11,7 @@ import net.jxtremeog.extendedmod.recipe.ModRecipes;
 import net.jxtremeog.extendedmod.screen.ModMenuTypes;
 import net.jxtremeog.extendedmod.screen.TempScreen;
 import net.jxtremeog.extendedmod.villager.ModVillagers;
+import net.jxtremeog.extendedmod.world.dimension.ModDimensions;
 import net.jxtremeog.extendedmod.world.feature.ModConfiguredFeatures;
 import net.jxtremeog.extendedmod.world.feature.ModPlacedFeatures;
 import net.minecraft.client.gui.screens.MenuScreens;
@@ -39,6 +40,8 @@ public class ExtendedMod
         ModBlocks.register(modEventBus);
 
         ModVillagers.register(modEventBus);
+
+        ModDimensions.register();
 
         ModConfiguredFeatures.register(modEventBus);
         ModPlacedFeatures.register(modEventBus);

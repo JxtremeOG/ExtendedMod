@@ -1,4 +1,5 @@
 {
+  "render_type": "translucent",
   "textures": {
     "particle": "extendedmod:block/jx_portal",
     "portal": "extendedmod:block/jx_portal"

@@ -1,9 +1,22 @@
+buildscript {
+    repositories {
+        maven { url = 'https://maven.minecraftforge.net/' }
+        maven { url = 'https://repo.spongepowered.org/repository/maven-public/' }
+        mavenCentral()
+    }
+    dependencies {
+        classpath group: 'net.minecraftforge.gradle', name: 'ForgeGradle', version: '5.+', changing: true
+        classpath 'org.spongepowered:mixingradle:0.7-SNAPSHOT'
+    }
+}
 plugins {
     id 'eclipse'
     id 'maven-publish'
     id 'net.minecraftforge.gradle' version '5.1.+'
     id 'org.parchmentmc.librarian.forgegradle' version '1.+'
 }
+apply plugin: 'idea'
+apply plugin: 'org.spongepowered.mixin'
 
 version = '0.0.1-1.19.2'
 group = 'net.jxtremeog.extendedmod' // http://maven.apache.org/guides/mini/guide-naming-conventions.html
@@ -135,6 +148,8 @@ dependencies {
     // The userdev artifact is a special name and will get all sorts of transformations applied to it.
     minecraft 'net.minecraftforge:forge:1.19.2-43.2.0'
 
+    minecraft 'net.minecraftforge:forge:' + mc_version + '-' + forge_version
+    implementation fg.deobf("com.github.glitchfiend:TerraBlender-forge:${terrablender_version}")
     // compile against the JEI API but do not include it at runtime
     compileOnly(fg.deobf("mezz.jei:jei-${mc_version}-common-api:${jei_version}"))
     compileOnly(fg.deobf("mezz.jei:jei-${mc_version}-forge-api:${jei_version}"))
@@ -144,7 +159,7 @@ dependencies {
     // Real mod deobf dependency examples - these get remapped to your current mappings
     // compileOnly fg.deobf("mezz.jei:jei-${mc_version}:${jei_version}:api") // Adds JEI API as a compile dependency
     // runtimeOnly fg.deobf("mezz.jei:jei-${mc_version}:${jei_version}") // Adds the full JEI mod as a runtime dependency
-    // implementation fg.deobf("com.tterrag.registrate:Registrate:MC${mc_version}-${registrate_version}") // Adds registrate as a dependency
+//     implementation fg.deobf("com.tterrag.registrate:Registrate:MC${mc_version}-${registrate_version}") // Adds registrate as a dependency
 
     // Examples using mod jars from ./libs
     // implementation fg.deobf("blank:coolmod-${mc_version}:${coolmod_version}")

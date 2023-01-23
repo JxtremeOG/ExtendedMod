@@ -11,6 +11,8 @@ import net.jxtremeog.extendedmod.recipe.ModRecipes;
 import net.jxtremeog.extendedmod.screen.ModMenuTypes;
 import net.jxtremeog.extendedmod.screen.TempScreen;
 import net.jxtremeog.extendedmod.terrablender.ModBiomes;
+import net.jxtremeog.extendedmod.terrablender.TestRegion;
+import net.jxtremeog.extendedmod.terrablender.TestSurfaceRuleData;
 import net.jxtremeog.extendedmod.villager.ModPOIs;
 import net.jxtremeog.extendedmod.villager.ModVillagers;
 import net.jxtremeog.extendedmod.world.dimension.ModDimensions;
@@ -19,6 +21,7 @@ import net.jxtremeog.extendedmod.world.feature.ModPlacedFeatures;
 import net.minecraft.client.gui.screens.MenuScreens;
 import net.minecraft.client.renderer.ItemBlockRenderTypes;
 import net.minecraft.client.renderer.RenderType;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -27,6 +30,8 @@ import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import org.slf4j.Logger;
+import terrablender.api.Regions;
+import terrablender.api.SurfaceRuleManager;
 
 // The value here should match an entry in the META-INF/mods.toml file
 @Mod(ExtendedMod.MOD_ID)
@@ -70,6 +75,11 @@ public class ExtendedMod
     private void commonSetup(final FMLCommonSetupEvent event) {
         event.enqueueWork(() -> {
             ModVillagers.registerPOIS();
+            // Given we only add two biomes, we should keep our weight relatively low.
+            Regions.register(new TestRegion(new ResourceLocation(MOD_ID, "gum_forest_region"), 1));
+
+            // Register our surface rules
+            SurfaceRuleManager.addSurfaceRules(SurfaceRuleManager.RuleCategory.OVERWORLD, MOD_ID, TestSurfaceRuleData.makeRules());
         });
     }
 

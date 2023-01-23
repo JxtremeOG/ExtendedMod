@@ -17,14 +17,12 @@ import static terrablender.api.ParameterUtils.*;
 
 public class TestRegion extends Region
 {
-    public TestRegion(ResourceLocation name, int weight)
-    {
+    public TestRegion(ResourceLocation name, int weight) {
         super(name, RegionType.OVERWORLD, weight);
     }
 
     @Override
-    public void addBiomes(Registry<Biome> registry, Consumer<Pair<Climate.ParameterPoint, ResourceKey<Biome>>> mapper)
-    {
+    public void addBiomes(Registry<Biome> registry, Consumer<Pair<Climate.ParameterPoint, ResourceKey<Biome>>> mapper) {
         this.addModifiedVanillaOverworldBiomes(mapper, builder -> {
             // Simple example:
             // Replace the Vanilla desert with our hot_red biome

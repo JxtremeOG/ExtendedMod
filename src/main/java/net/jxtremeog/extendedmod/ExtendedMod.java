@@ -64,10 +64,10 @@ public class ExtendedMod
 
         ModLootModifiers.register(modEventBus);
 
-        modEventBus.addListener(this::commonSetup);
-
         ModBiomes.BIOME_REGISTER.register(modEventBus);
         ModBiomes.registerBiomes();
+
+        modEventBus.addListener(this::commonSetup);
 
         MinecraftForge.EVENT_BUS.register(this);
     }
@@ -75,8 +75,9 @@ public class ExtendedMod
     private void commonSetup(final FMLCommonSetupEvent event) {
         event.enqueueWork(() -> {
             ModVillagers.registerPOIS();
+
             // Given we only add two biomes, we should keep our weight relatively low.
-            Regions.register(new TestRegion(new ResourceLocation(MOD_ID, "gum_forest_region"), 1));
+            Regions.register(new TestRegion(new ResourceLocation(MOD_ID, "overworld"), 2));
 
             // Register our surface rules
             SurfaceRuleManager.addSurfaceRules(SurfaceRuleManager.RuleCategory.OVERWORLD, MOD_ID, TestSurfaceRuleData.makeRules());

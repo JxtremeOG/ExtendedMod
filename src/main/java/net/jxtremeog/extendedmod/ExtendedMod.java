@@ -74,13 +74,9 @@ public class ExtendedMod
 
     private void commonSetup(final FMLCommonSetupEvent event) {
         event.enqueueWork(() -> {
-            ModVillagers.registerPOIS();
-
-            // Given we only add two biomes, we should keep our weight relatively low.
-            Regions.register(new TestRegion(new ResourceLocation(MOD_ID, "overworld"), 2));
-
-            // Register our surface rules
             SurfaceRuleManager.addSurfaceRules(SurfaceRuleManager.RuleCategory.OVERWORLD, MOD_ID, TestSurfaceRuleData.makeRules());
+            Regions.register(new TestRegion(new ResourceLocation(MOD_ID, "overworld"), 2));
+            ModVillagers.registerPOIS();
         });
     }
 
